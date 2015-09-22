@@ -15,6 +15,7 @@
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
 	<link rel="stylesheet" type="text/css" href="{{ URL::to('/') }}/css/app.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	@yield('extra-css')
 	
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
