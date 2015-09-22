@@ -44,5 +44,6 @@ Vagrant.configure(2) do |config|
     cd /var/www/html/
     sudo composer update
     sudo php artisan migrate
+    sudo php artisan db:seed
   SHELL
 end
