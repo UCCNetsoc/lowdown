@@ -31,7 +31,8 @@ class SettingsSeeder extends Seeder {
         DB::table('settings')->delete();
 
         Setting::create(['name' => 'number_of_societies', 'setting' => '103']);
-        Setting::create(['name' => 'last_society', 'setting' => '1']);
+        Setting::create(['name' => 'next_society', 'setting' => '1']);
+        Setting::create(['name' => 'next_user', 'setting' => '1']);
         Setting::create(['name' => 'logo', 'setting' => 'http://netsoc.co/wp-content/themes/netsoc/images/horizontal.png']);
         Setting::create(['name' => 'name', 'setting' => 'UCC Networking, Gaming And Technology Society']);
 
