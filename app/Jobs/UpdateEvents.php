@@ -35,6 +35,7 @@ class UpdateEvents extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
+
         FacebookSession::setDefaultApplication( getenv('FB_ID'), getenv('FB_SECRET') );
         $session = FacebookSession::newAppSession();
 
@@ -48,40 +49,64 @@ class UpdateEvents extends Job implements SelfHandling, ShouldQueue
           dd($ex);
         }
 
+        $toTake = 20; // Handle 20 societies at once :)
+
         $store = \App\Setting::where('name', 'last_society')
                                   ->first();
-        $lastUpdated = $store->setting;
+        $lastUpdated = $store->setting; // Get last society ID updated;
 
         $societies = \App\Society::where('id', '>', $lastUpdated)
-                                ->take(20)
-                                ->get();
-
-        if( count($societies) < 20 ){
-            $store->setting = 0;
-            $store->save(); 
-        }
+                                ->take($toTake)->orderBy('id')
+                                ->get(); // Get Societies to query
 
         foreach($societies as $society){
             $request = new FacebookRequest($session, 'GET', '/' . $society->facebook_ref . '/events' .
-                                           '?since'.time().'&fields=name,start_time,location,description,cover');
-            $response = $request->execute();
+                                           '?since='.time().'&fields=name,start_time,location,description,cover');
+
+            try{
+                $response = $request->execute();
+            } catch(\Exception $ex) {
+                continue; // TODO: Report errors back to us :)
+            }
             $graphObject = $response->getGraphObject();
 
-            $events = $graphObject->data;
+            $events = $graphObject->asArray();
 
-            foreach($events as $fbEvent){
-                $storedEvent = \App\Event::firstOrNew(['facebook_id' => $fbEvent->id]);
+            if( array_key_exists('data', $events) ){
+                $events = $events['data'];
 
-                $storedEvent->society_id = $society->id;
-                $storedEvent->title = $fbEvent->name;
-                $storedEvent->description = $fbEvent->description;
-                $storedEvent->location = $fbEvent->location;
-                $storedEvent->time = $fbEvent->start_time;
-                $storedEvent->image = $fbEvent->cover->source;
+                foreach($events as $fbEvent){
+                    $storedEvent = \App\Event::firstOrNew(['facebook_id' => $fbEvent->id]);
 
-                $storedEvent->save();
+                    $storedEvent->society_id = $society->id;
+                    $storedEvent->title = $fbEvent->name;
+                    $storedEvent->time = $fbEvent->start_time;
+                    if(array_key_exists("description", $fbEvent) ){
+                        $storedEvent->description = $fbEvent->description;
+                    }
+                    if(array_key_exists("location", $fbEvent) ){
+                        $storedEvent->location = $fbEvent->location;
+                    }
+                    if(array_key_exists("cover", $fbEvent)){
+                        $storedEvent->image = $fbEvent->cover->source;
+                    }
+
+                    $storedEvent->save();
+                }
             }
-
         }
+
+        if( count($societies) < $toTake ){
+             $store->setting = 0;
+        } else {
+            $store->setting += $toTake;
+        }
+
+        $store->save();
+
+        // $job = (new \App\Jobs\UpdateEvents())->delay(600);
+
+        // $this->dispatch($job);
+
     }
 }
