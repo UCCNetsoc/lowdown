@@ -170,14 +170,16 @@ class UserController extends Controller
         $data = explode(' ', trim(preg_replace('/\s+/', ' ', $data['allSubscriptions'])));
         
         foreach ($data as $societyID) {
-            try {
-                // If subscription exists, cancel it
-                $currentSubscription = Subscription::find($societyID);
-                $currentSubscription->delete();    
-            } catch (ModelNotFoundException $e) {
-                // If subscription doesn't exist, create one
-                Subscription::create(['society_id' => $societyID, 'user_id' => Auth::user()->id]);
-            }            
+            if((1 <= $societyID) && ($societyID <= Setting::where('name', 'number_of_societies')->first()->setting)){
+                try {
+                    // If subscription exists, cancel it
+                    $currentSubscription = Subscription::findOrFail($societyID);
+                    $currentSubscription->delete();    
+                } catch (ModelNotFoundException $e) {
+                    // If subscription doesn't exist, create one
+                    Subscription::create(['society_id' => $societyID, 'user_id' => Auth::user()->id]);
+                }    
+            }        
         }
 
         return Redirect::route('subscriptions');
