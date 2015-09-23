@@ -5,13 +5,9 @@
 
 		{!! Form::open( array('route' => 'subscriptions/add', 'method' => 'post', 'class' => 'row col s12') ) 		!!}
 		
-		<div class="col m6 s12">
 			@foreach($societies as $society)
-				@if( $society->id % ($numberOfSocieties / 2) )
-					</div>
-					<div class="col m6 s12">
-				@endif
-				<p>
+				
+				<p class="col m4 s12">
 					<input 
 						type="checkbox" id="{{ $society->id }}" name="{{ $society->id }}" 
 
@@ -24,12 +20,13 @@
 					<label for="{{ $society->id }}">{{ $society->name }} Society</label>
 				</p>
 			@endforeach
-		</div>
 		
 		<input type="hidden" name="allSubscriptions" value=""/>
-		<button class="btn waves-effect waves-light" type="submit" name="action">Update
-			<i class="mdi-content-send right"></i>
-		</button>
+		<div class="row">
+			<button class="btn waves-effect waves-light" type="submit" name="action" id="update-subscription">Update Subscription
+				<i class="mdi-content-send right"></i>
+			</button>
+		</div>
 		{!! Form::close() !!}
 	</main>
 
