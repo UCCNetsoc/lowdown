@@ -24,3 +24,10 @@ Route::post('/user/store', ['as' => 'user/store', 'uses' => 'UserController@stor
 
 Route::get('/login', ['as' => 'login', 'uses' => 'UserController@login']);
 Route::post('/user/login', ['as' => 'handleLogin', 'uses' => 'UserController@handleLogin']);
+
+Route::get('/home', ['as' => 'home', 'uses' => 'EventsController@index']);
+
+Route::group(['prefix' => 'events'], function()
+{
+	// Events
+});
