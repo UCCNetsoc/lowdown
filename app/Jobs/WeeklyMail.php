@@ -7,6 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use App\User;
 
 class WeeklyMail extends Job implements SelfHandling, ShouldQueue
 {
@@ -29,7 +30,7 @@ class WeeklyMail extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        for(\App\User::all() as $user){
+        for(User::all() as $user){
             $this->dispatch( new SendEmail($user) )->delay(30);
         }
     }

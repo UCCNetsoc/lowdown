@@ -7,6 +7,8 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use App\User;
+use App\Event;
 
 class SendEmail extends Job implements SelfHandling, ShouldQueue
 {
@@ -34,7 +36,7 @@ class SendEmail extends Job implements SelfHandling, ShouldQueue
         $soc_ids = DB::table('subscriptions')->whereIn('user_id', $user->id)->lists('society_id');
 
         // All Events, in user subscribed society, next week. 
-        $events  = \App\Event::whereIn('society_id', $soc_ids)
+        $events  = Event::whereIn('society_id', $soc_ids)
                               ->where( 'time', '>', date('Y-m-d H:i:s') )
                               ->where( 'time', '<', date('Y-m-d H:i:s', now()+604800) );
 
