@@ -3,22 +3,6 @@
 @section('content')
 	<main class="row container">
 
-		<script>
-			// Tracks changes on checkboxes
-			function addToList( id ){
-
-				var currentText = $('input[name=allSubscriptions]').val();
-				if( currentText.search(new RegExp(" ?" + id + " ?")) >= 0 ){
-					// If the number's already in the string, remove it
-					
-					$('input[name=allSubscriptions]').val(
-						currentText.replace( new RegExp(" ?" + id + " ?"), " ")
-					);
-				} else {
-					$('input[name=allSubscriptions]').val( currentText + " " + id );
-				}
-			}
-		</script>
 		{!! Form::open( array('route' => 'subscriptions/add', 'method' => 'post', 'class' => 'row col s12') ) 		!!}
 		
 		<div class="col m6 s12">
