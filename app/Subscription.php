@@ -12,7 +12,7 @@ class Subscription extends Model
      *
      * @var string
      */
-    protected $table = 'societies';
+    protected $table = 'subscriptions';
 
     /**
      * The attributes that are mass assignable.
