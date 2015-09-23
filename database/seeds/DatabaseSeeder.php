@@ -48,13 +48,13 @@ class SocietiesSeeder extends Seeder {
 
         Society::create(['name' => 'Africa', 'facebook_ref' => 'uccafrica']);
         Society::create(['name' => 'Amnesty', 'facebook_ref' => 'UCCAmnesty']);
-        Society::create(['name' => 'Animal Welfare', 'facebook_ref' => 'UccAnimalWelfareSoc']);
+        Society::create(['name' => 'Animal Welfare', 'facebook_ref' => 'AniWelUCC']);
         Society::create(['name' => 'CCAE Architecture', 'facebook_ref' => 'ccaearchitecturesociety']);
         Society::create(['name' => 'Art', 'facebook_ref' => 'uccart.soc']);
         Society::create(['name' => 'Barnardos', 'facebook_ref' => 'UCCBarnardos']);
         Society::create(['name' => 'Biology', 'facebook_ref' => 'uccbiosoc']);
         Society::create(['name' => 'Cancer', 'facebook_ref' => 'ucc.cancersociety']);
-        Society::create(['name' => 'Chemical', 'facebook_ref' => 'uccchemicalsociety']);
+        Society::create(['name' => 'Chemical', 'facebook_ref' => '236000773224765']);
         Society::create(['name' => 'Chinese', 'facebook_ref' => 'UccChineseSociety']);
         Society::create(['name' => 'Choral', 'facebook_ref' => 'UCCChoral']);
         Society::create(['name' => 'Christian Union', 'facebook_ref' => 'UCCChristianUnionSociety']);
@@ -62,10 +62,10 @@ class SocietiesSeeder extends Seeder {
         Society::create(['name' => 'Comedy', 'facebook_ref' => 'ucccomedy']);
         Society::create(['name' => 'Commerce', 'facebook_ref' => 'commsoc.ucc']);
         Society::create(['name' => 'Dentist', 'facebook_ref' => 'dentsocucc']);
-        Society::create(['name' => 'Disability Activism & Awareness', 'facebook_ref' => 'ucc.disabilityactivism']);
-        Society::create(['name' => 'DJ', 'facebook_ref' => 'Uccdj']);
+        Society::create(['name' => 'Disability Activism & Awareness', 'facebook_ref' => 'uccdaasoc']);
+        Society::create(['name' => 'DJ', 'facebook_ref' => 'djsocucc']);
         Society::create(['name' => 'Dramat', 'facebook_ref' => 'UCCDramat']);
-        Society::create(['name' => 'Enactus', 'facebook_ref' => 'UCCEnactus']);
+        // Society::create(['name' => 'Enactus', 'facebook_ref' => '392583690818520']); // doesn't seem to want to load from graph api?!?
         Society::create(['name' => 'Engineers Without Borders', 'facebook_ref' => 'EngineerswithoutbordersUCC']);
         Society::create(['name' => 'Environment', 'facebook_ref' => 'UCCEnvirosoc']);
         Society::create(['name' => 'Europa', 'facebook_ref' => 'ucceuropa']);
@@ -89,8 +89,8 @@ class SocietiesSeeder extends Seeder {
         Society::create(['name' => 'Labour', 'facebook_ref' => 'ucclabour']);
         Society::create(['name' => 'Law', 'facebook_ref' => 'ucclawsociety']);
         Society::create(['name' => 'LGBT', 'facebook_ref' => 'ucclgbt']);
-        // Society::create(['name' => 'Live Music', 'facebook_ref' => 'ucclms']);
-        Society::create(['name' => 'Macra Na Feirme', 'facebook_ref' => 'MacraNaFeirmeUCC']);
+        // Society::create(['name' => 'Live Music', 'facebook_ref' => 'ucclms']); // closed society
+        Society::create(['name' => 'Macra Na Feirme', 'facebook_ref' => 'uccmacra']);
         Society::create(['name' => 'Math', 'facebook_ref' => 'uccmathsoc']);
         Society::create(['name' => 'Medical', 'facebook_ref' => 'ucc.medsoc']);
         Society::create(['name' => 'Medieval And Renaissance', 'facebook_ref' => 'UCCMedRen']);
@@ -105,18 +105,18 @@ class SocietiesSeeder extends Seeder {
         Society::create(['name' => 'Politics', 'facebook_ref' => 'PolSocUCC']);
         Society::create(['name' => 'SAMH', 'facebook_ref' => 'uccsamhsoc']);
         Society::create(['name' => 'Science', 'facebook_ref' => 'uccsciencesociety']);
-        Society::create(['name' => 'Scifi', 'facebook_ref' => 'uccscifisoc']);
+        Society::create(['name' => 'Scifi', 'facebook_ref' => 'uccscifi']);
         Society::create(['name' => 'Sinn Fein', 'facebook_ref' => 'uccsinnfein']);
         Society::create(['name' => 'Social Science', 'facebook_ref' => 'uccsocsci']);
         Society::create(['name' => 'SSDP', 'facebook_ref' => 'UCCSSDP']);
-        Society::create(['name' => 'Surgeon Noonan', 'facebook_ref' => 'surgeonnoonan']);
+        Society::create(['name' => 'Surgeon Noonan', 'facebook_ref' => '1650501751859811']);
         Society::create(['name' => 'Surgeon', 'facebook_ref' => 'surgsoc']);
         Society::create(['name' => 'Suas', 'facebook_ref' => 'uccsuas']);
         Society::create(['name' => 'Fine Gael', 'facebook_ref' => 'uccyoungfinegael']);
         Society::create(['name' => 'Accounting And Finance', 'facebook_ref' => 'uccaccfin']);
         Society::create(['name' => 'An Chuallact', 'facebook_ref' => 'anchuallachtucc']);
         Society::create(['name' => 'Archaeological', 'facebook_ref' => 'UCCArchSoc']);
-        Society::create(['name' => 'E&S', 'facebook_ref' => 'uccEandS']);
+        // Society::create(['name' => 'E&S', 'facebook_ref' => 'uccEandS']); // Not returning from Facebook either - must investigate
         Society::create(['name' => 'Economics', 'facebook_ref' => 'ucceconomics']);
         Society::create(['name' => 'Fashion', 'facebook_ref' => '155068187434']);
         Society::create(['name' => 'Fianna Fail', 'facebook_ref' => 'UccFFSoc']);
