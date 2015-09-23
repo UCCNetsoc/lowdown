@@ -33,7 +33,7 @@
 			<div class="nav-wrapper container">
 			  <a href="{{ URL::to('/home') }}" class="brand-logo">
 			  	<figure>
-					<img src="{{URL::to('/')}}/images/logo.png" alt="{{ env( 'SITE_TITLE' ) }}" class="logo">
+					<img src="{{ App\Setting::where('name', 'logo')->first()->setting }}" alt="{{ env( 'SITE_TITLE' ) }}" class="logo">
 					<figcaption class="sr-only">
 						<h1> {{ env( 'SITE_TITLE' ) }}</h1>
 					</figcaption>
@@ -42,19 +42,20 @@
 			  <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 			  <ul class="right hide-on-med-and-down">
 			  	@if( Auth::check( ) )
-			  		<li><a href="{{ URL::to( 'home' ) }}">Home</a></li>
+			  		<li><a href="{{ URL::to( 'home' ) }}" class="black-text">Home</a></li>
 			  	@else 
-					<li class="login"><a class="waves-effect waves-light modal-trigger" href="#login-modal">Login</a></li>
-					<li><a href="{{ URL::route('register') }}">Register</a></li>
+					<li class="login"><a class="waves-effect waves-light modal-trigger black-text" href="#login-modal">Login</a></li>
+					<li><a href="{{ URL::route('register') }}" class="black-text">Register</a></li>
 			  	@endif
 			  </ul>
+
 			  <ul class="side-nav" id="mobile-demo">
 
 			  	@if( Auth::check( ) )
-			  		<li><a href="{{ URL::to( 'home' ) }}">Home</a></li>
+			  		<li><a href="{{ URL::to( 'home' ) }}" class="black-text">Home</a></li>
 			  	@else 
-					<li class="login"><a class="waves-effect waves-light modal-trigger" href="#login-modal">Login</a></li>
-					<li><a href="{{ URL::route('register') }}">Register</a></li>
+					<li class="login"><a class="waves-effect waves-light modal-trigger black-text" href="#login-modal">Login</a></li>
+					<li><a href="{{ URL::route('register') }}" class="black-text">Register</a></li>
 			  	@endif
 			 
 			  </ul>
