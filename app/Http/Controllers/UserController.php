@@ -77,8 +77,9 @@ class UserController extends Controller
 
         if( $newUser ){
             Auth::login($newUser);
+
         	// If successful, go to home
-        	return Redirect::route( 'home' );
+        	return Redirect::route( 'subscriptions' );
         }
         
         // If unsuccessful, return with errors
