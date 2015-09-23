@@ -16,6 +16,9 @@ class CreateSocietiesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('facebook_ref');
+
+            // For featuring random societies every week
+            $table->timestamp('last_featured');
             $table->timestamps();
         });
     }
