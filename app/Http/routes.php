@@ -31,3 +31,9 @@ Route::group(['prefix' => 'events'], function()
 {
 	// Events
 });
+
+Route::group(['prefix' => 'user', 'middleware' => 'auth'], function()
+{
+	Route::get('/subscriptions', ['as' => 'subscriptions', 'uses' => 'UserController@subscriptions']);
+	Route::post('/subscriptions/add', ['as' => 'subscriptions/add', 'uses' => 'UserController@updateSubscriptions']);
+});
