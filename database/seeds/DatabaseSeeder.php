@@ -90,7 +90,6 @@ class SocietiesSeeder extends Seeder {
         Society::create(['name' => 'Labour', 'facebook_ref' => 'ucclabour']);
         Society::create(['name' => 'Law', 'facebook_ref' => 'ucclawsociety']);
         Society::create(['name' => 'LGBT', 'facebook_ref' => 'ucclgbt']);
-        // Society::create(['name' => 'Live Music', 'facebook_ref' => 'ucclms']);
         Society::create(['name' => 'Macra Na Feirme', 'facebook_ref' => 'MacraNaFeirmeUCC']);
         Society::create(['name' => 'Math', 'facebook_ref' => 'uccmathsoc']);
         Society::create(['name' => 'Medical', 'facebook_ref' => 'ucc.medsoc']);
