@@ -11,6 +11,7 @@ use App\User;
 use App\Society;
 use App\Event;
 use App\Subscription;
+use App\Jobs\EstablishUserSubscription;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserController extends Controller
@@ -77,6 +78,8 @@ class UserController extends Controller
 
         if( $newUser ){
             Auth::login($newUser);
+
+            $this->dispatch(new EstablishUserSubscription($newUser));
 
         	// If successful, go to home
         	return Redirect::route( 'subscriptions' );
