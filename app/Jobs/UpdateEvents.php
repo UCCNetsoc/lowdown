@@ -49,7 +49,7 @@ class UpdateEvents extends Job implements SelfHandling, ShouldQueue
           dd($ex);
         }
 
-        $toTake = 20; // Handle 20 societies at once :)
+        $toTake = 200; // Handle 20 societies at once :)
 
         $store = \App\Setting::where('name', 'last_society')
                                   ->first();
