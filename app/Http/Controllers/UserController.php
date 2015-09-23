@@ -8,6 +8,10 @@ use Request;
 use Validator;
 use Hash;
 use App\User;
+use App\Society;
+use App\Event;
+use App\Subscription;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserController extends Controller
 {
@@ -134,5 +138,22 @@ class UserController extends Controller
         }
 
         return Redirect::route( 'login' )->withInput( );
+    }
+
+    public function subscriptions( ){
+        $societies = Society::all( );
+
+        $subscriptions = User::find(Auth::user()->id)->subscriptions( );
+        $subscriptions = $subscriptions->get();
+
+        foreach ($subscriptions as $subscription) {
+            $societies[$subscription->society_id]->checked = "checked";
+        }
+
+        return View::make('users.subscriptions')->with('societies', $societies);
+    }
+
+    public function updateSubscriptions( ){
+        dd( Request::all( ) );
     }
 }
