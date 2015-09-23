@@ -8,6 +8,9 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
+use App\Society;
+use App\Subscription;
+
 class EstablishUserSubscription extends Job implements SelfHandling, ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
@@ -22,6 +25,8 @@ class EstablishUserSubscription extends Job implements SelfHandling, ShouldQueue
     public function __construct(User $user)
     {
         $this->user = $user;
+        $this->user->processing = 'yes';
+        $this->user->save();
     }
 
     /**
@@ -31,8 +36,11 @@ class EstablishUserSubscription extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        foreach( \App\Society::all() as $society ){
-            \App\Subscription::create(['user_id' => $this->user->id, 'society_id' => $society->id]);
+        foreach( Society::all() as $society ){
+            Subscription::create(['user_id' => $this->user->id, 'society_id' => $society->id]);
         }
+
+        $this->user->processing = 'no';
+        $this->user->save();
     }
 }
