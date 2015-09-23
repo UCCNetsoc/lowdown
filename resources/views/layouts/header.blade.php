@@ -33,7 +33,7 @@
 			<div class="nav-wrapper container">
 			  <a href="{{ URL::to('/home') }}" class="brand-logo">
 			  	<figure>
-					<img src="images/logo.png" alt="{{ env( 'SITE_TITLE' ) }}" class="logo">
+					<img src="{{URL::to('/')}}/images/logo.png" alt="{{ env( 'SITE_TITLE' ) }}" class="logo">
 					<figcaption class="sr-only">
 						<h1> {{ env( 'SITE_TITLE' ) }}</h1>
 					</figcaption>
