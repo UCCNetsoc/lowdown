@@ -11,6 +11,7 @@ use App\User;
 use App\Society;
 use App\Event;
 use App\Subscription;
+use App\Setting;
 use App\Jobs\EstablishUserSubscription;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -151,13 +152,34 @@ class UserController extends Controller
         $subscriptions = $subscriptions->get();
 
         foreach ($subscriptions as $subscription) {
-            $societies[$subscription->society_id]->checked = "checked";
+
+            $societies[$subscription->society_id - 1]->checked = "checked";
         }
 
-        return View::make('users.subscriptions')->with('societies', $societies);
+        $numberOfSocieties = Setting::where('name', 'number_of_societies')->first()->setting;
+
+        return View::make('users.subscriptions')
+                    ->with('societies', $societies)
+                    ->with('numberOfSocieties', $numberOfSocieties);
     }
 
     public function updateSubscriptions( ){
-        dd( Request::all( ) );
+        $data = Request::only(['allSubscriptions']);
+
+        // Trim and replace all extranneous whitespace then explode the array
+        $data = explode(' ', trim(preg_replace('/\s+/', ' ', $data['allSubscriptions'])));
+        
+        foreach ($data as $societyID) {
+            try {
+                // If subscription exists, cancel it
+                $currentSubscription = Subscription::find($societyID);
+                $currentSubscription->delete();    
+            } catch (ModelNotFoundException $e) {
+                // If subscription doesn't exist, create one
+                Subscription::create(['society_id' => $societyID, 'user_id' => Auth::user()->id]);
+            }            
+        }
+
+        return Redirect::route('subscriptions');
     }
 }
