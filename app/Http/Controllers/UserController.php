@@ -146,6 +146,11 @@ class UserController extends Controller
     }
 
     public function subscriptions( ){
+        if( Auth::user()->processing == 'yes' ){
+            header("Refresh:5");
+            echo "We're currently setting up your account, bear with us...";
+        }
+
         $societies = Society::all( );
 
         $subscriptions = User::find(Auth::user()->id)->subscriptions( );
