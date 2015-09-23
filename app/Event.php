@@ -4,22 +4,22 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-
-class Society extends Model 
+class Event extends Model
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'societies';
+    protected $table = 'events';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name', 'facebook_ref'];
+    protected $fillable = ['society_id','facebook_id','title',
+    					   'description','location','time','image'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -28,8 +28,11 @@ class Society extends Model
      */
     protected $hidden = [];
 
-    public function events()
+    /**
+     * Get the society that owns the event.
+     */
+    public function society()
     {
-        return $this->hasMany('App\Event');
+        return $this->belongsTo('App\Society');
     }
 }
