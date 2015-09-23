@@ -72,6 +72,7 @@ class UserController extends Controller
         $newUser = User::create( $data );
 
         if( $newUser ){
+            Auth::login($newUser);
         	// If successful, go to home
         	return Redirect::route( 'home' );
         }
