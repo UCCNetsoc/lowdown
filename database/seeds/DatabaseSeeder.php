@@ -181,16 +181,7 @@ class EventsSeeder extends Seeder{
           dd($ex);
         }
 
-        $toTake = 200; // Handle 20 societies at once :)
-
-        // $store = \App\Setting::where('name', 'last_society')
-        //                           ->first();
-        // $lastUpdated = $store->setting; // Get last society ID updated;
-        $lastUpdated = 0;
-
-        $societies = Society::where('id', '>', $lastUpdated)
-                                ->take($toTake)->orderBy('id')
-                                ->get(); // Get Societies to query
+        $societies = Society::all();
 
         foreach($societies as $society){
             $request = new FacebookRequest($session, 'GET', '/' . $society->facebook_ref . '/events' .
