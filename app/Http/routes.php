@@ -30,6 +30,9 @@ Route::get('/home', ['as' => 'home', 'uses' => 'EventsController@index']);
 Route::group(['prefix' => 'events'], function()
 {
 	// Events
+	Route::get('/{day}', 'EventsController@dayView');
+	Route::get('/{day}/{id}', 'EventsController@dayViewForUser');
+	Route::get('/{day}/json', 'EventsController@dayJSON');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function()
