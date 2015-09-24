@@ -13,6 +13,7 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix.less('app.less');
+    mix.scriptsIn("resources/assets/js", "public/js/app.js");
 });
 
 require('laravel-elixir-browser-sync');
