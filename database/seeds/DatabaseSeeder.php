@@ -5,6 +5,13 @@ use Illuminate\Database\Eloquent\Model;
 use App\Setting;
 use App\Society;
 use App\User;
+use App\Event;
+
+use Facebook\FacebookSession;
+use Facebook\FacebookRequest;
+use Facebook\GraphUser;
+use Facebook\FacebookRequestException;
+use Facebook\FacebookRedirectLoginHelper;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,6 +26,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call('SettingsSeeder');
         $this->call('SocietiesSeeder');
+        $this->call('EventsSeeder');
 
         Model::reguard();
     }
@@ -156,4 +164,72 @@ class SocietiesSeeder extends Seeder {
         $this->command->info('Societies table seeded!');
     }
 
+}
+
+class EventsSeeder extends Seeder{
+    public function run(){
+        FacebookSession::setDefaultApplication( getenv('FB_ID'), getenv('FB_SECRET') );
+        $session = FacebookSession::newAppSession();
+
+        try {
+          $session->validate();
+        } catch (FacebookRequestException $ex) {
+          // Session not valid, Graph API returned an exception with the reason.
+          dd($ex);
+        } catch (\Exception $ex) {
+          // Graph API returned info, but it may mismatch the current app or have expired.
+          dd($ex);
+        }
+
+        $toTake = 200; // Handle 20 societies at once :)
+
+        // $store = \App\Setting::where('name', 'last_society')
+        //                           ->first();
+        // $lastUpdated = $store->setting; // Get last society ID updated;
+        $lastUpdated = 0;
+
+        $societies = Society::where('id', '>', $lastUpdated)
+                                ->take($toTake)->orderBy('id')
+                                ->get(); // Get Societies to query
+
+        foreach($societies as $society){
+            $request = new FacebookRequest($session, 'GET', '/' . $society->facebook_ref . '/events' .
+                                           '?since='.time().'&fields=name,start_time,location,description,cover');
+
+            try{
+                $response = $request->execute();
+            } catch(\Exception $ex) {
+                continue; // TODO: Report errors back to us :)
+            }
+            $graphObject = $response->getGraphObject();
+
+            $events = $graphObject->asArray();
+
+            if( array_key_exists('data', $events) ){
+                $events = $events['data'];
+
+                foreach($events as $fbEvent){
+                    $storedEvent = Event::firstOrNew(['facebook_id' => $fbEvent->id]);
+
+                    $storedEvent->society_id = $society->id;
+                    $storedEvent->title = $fbEvent->name;
+                    $storedEvent->time = $fbEvent->start_time;
+                    if(array_key_exists("description", $fbEvent) ){
+                        $storedEvent->description = $fbEvent->description;
+                    }
+                    if(array_key_exists("location", $fbEvent) ){
+                        $storedEvent->location = $fbEvent->location;
+                    }
+                    if(array_key_exists("cover", $fbEvent)){
+                        $storedEvent->image = $fbEvent->cover->source;
+                    }
+
+                    $storedEvent->save();
+                }
+            }
+        }
+        
+        $this->command->info('Events table seeded!');
+
+    }
 }
