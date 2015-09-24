@@ -6,6 +6,7 @@ use Response;
 use Redirect;
 use Request;
 use Validator;
+use DB;
 use App\User;
 use App\Event;
 use App\Subscription;
