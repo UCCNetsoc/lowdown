@@ -147,8 +147,8 @@ class UserController extends Controller
 
     public function subscriptions( ){
         if( Auth::user()->processing == 'yes' ){
-            header("Refresh:5");
-            echo "We're currently setting up your account, bear with us...";
+            header("Refresh:10");
+            return View::make('preparing-account');
         }
 
         $societies = Society::all( );
