@@ -3,7 +3,9 @@
 
 @section('content')
 <main class="container events">
+	<hr />
 	<h1>{{$day}}</h1>
+	<hr />
 
 	<div class="row">
 		@foreach($events as $event)
