@@ -50,7 +50,7 @@ class UserController extends Controller
     public function store( ){
     	// Only allow following fields to be submitted
         $data = Request::only( [
-                    'username',
+                    'name',
                     'password',
                     'password_confirmation',
                     'email'
@@ -58,7 +58,7 @@ class UserController extends Controller
 
         // Validate all input
         $validator = Validator::make( $data, [
-                    'username'  => 'required|unique:users|min:5|alpha_num',
+                    'name'  => 'required|min:5',
                     'email'     => 'email|required|unique:users',
                     'password'  => 'required|confirmed|min:5'
                 ]);
