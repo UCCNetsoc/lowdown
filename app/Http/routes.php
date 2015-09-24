@@ -41,4 +41,4 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function()
 	Route::post('/subscriptions/add', ['as' => 'subscriptions/add', 'uses' => 'UserController@updateSubscriptions']);
 });
 
-Route::get('/emails', ['as' => 'emails', 'uses' => 'EmailController@index']);
+Route::get('/emails', ['as' => 'emails', 'middleware' => 'auth', 'uses' => 'EmailController@index']);
