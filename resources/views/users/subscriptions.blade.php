@@ -2,6 +2,11 @@
 
 @section('content')
 	<main class="row container">
+		<p>Choose which societies you'd like to hear from. 
+			<a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="The idea of the lowdown is to learn about new society events, we want to encourage that more than anything.">
+				Why are all the societies ticked by default?
+			</a>
+		</p>
 
 		{!! Form::open( array('route' => 'subscriptions/add', 'method' => 'post', 'class' => 'row col s12') ) 		!!}
 		
