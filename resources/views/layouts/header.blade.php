@@ -39,6 +39,7 @@
 			  <ul class="right hide-on-med-and-down">
 			  	@if( Auth::check( ) )
 			  		<li><a href="{{ URL::to( 'home' ) }}" class="black-text">Home</a></li>
+			  		<li><a href="{{ URL::route('subscriptions') }}" class="black-text">Subscriptions</a></li>
 			  	@else 
 					<li class="login"><a class="waves-effect waves-light modal-trigger black-text" href="#login-modal">Login</a></li>
 					<li><a href="{{ URL::route('register') }}" class="black-text">Register</a></li>
@@ -49,6 +50,7 @@
 
 			  	@if( Auth::check( ) )
 			  		<li><a href="{{ URL::to( 'home' ) }}" class="black-text">Home</a></li>
+			  		<li><a href="{{ URL::route('subscriptions') }}" class="black-text">Subscriptions</a></li>
 			  	@else 
 					<li class="login"><a class="waves-effect waves-light modal-trigger black-text" href="#login-modal">Login</a></li>
 					<li><a href="{{ URL::route('register') }}" class="black-text">Register</a></li>
