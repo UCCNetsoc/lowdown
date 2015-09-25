@@ -53,14 +53,20 @@ SESSION_DRIVER=file
 QUEUE_DRIVER=sync
 
 MAIL_DRIVER=smtp
-MAIL_HOST=mailtrap.io
-MAIL_PORT=2525
-MAIL_USERNAME=null
-MAIL_PASSWORD=null
+MAIL_HOST=smtp.sendgrid.net
+MAIL_PORT=587
+MAIL_USERNAME=username
+MAIL_PASSWORD=password
 MAIL_ENCRYPTION=null
+MAIL_KEY=aaaabbbb11111
+MAIL_ADDRESS=lowdown@netsoc.co
+MAIL_NAME=Lowdown
 
 DEV_EMAIL=netsoc@uccsocieties.ie
 SITE_TITLE=Lowdown
+
+FB_ID=123456789
+FB_SECRET=aaaabbbb11111
 ```
 
 ### Node and Gulp
