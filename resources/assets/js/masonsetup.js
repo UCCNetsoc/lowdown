@@ -1,7 +1,9 @@
 
 $(document).ready(function(){
-	$('.events .row').masonry({
-	  // options...
-	  itemSelector: '.col'
-	});
+	setTimeout(function(){
+		$('.events .row').masonry({
+		  // options...
+		  itemSelector: '.col'
+		});
+	}, 1000);
 });
