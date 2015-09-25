@@ -16,7 +16,8 @@ class SendEmail extends Job implements SelfHandling, ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
 
-    protected $user;
+    private $user;
+    private $events;
 
     /**
      * Create a new job instance.
@@ -26,6 +27,9 @@ class SendEmail extends Job implements SelfHandling, ShouldQueue
     public function __construct(User $user)
     {
         $this->user = $user;
+        $this->events = Event::where( 'time', '>', date('Y-m-d H:i:s') )
+                              ->where( 'time', '<', date('Y-m-d H:i:s', time()+604800) )
+                              ->get();
     }
 
     /**
@@ -42,7 +46,16 @@ class SendEmail extends Job implements SelfHandling, ShouldQueue
                               ->where( 'time', '>', date('Y-m-d H:i:s') )
                               ->where( 'time', '<', date('Y-m-d H:i:s', time()+604800) );
 
-        Mail::send('emails.weekly', ['user' => $this->user, 'events' => $events], function ($message) {
+        $allEvents = $this->events->toArray();
+        $random_event = $allEvents[ array_rand( $allEvents, 1 ) ];
+
+        $data = [
+                    'user' => $this->user, 
+                    'events' => $events, 
+                    'random_event' => $random_event
+                ];
+
+        Mail::send('emails.weekly', $data, function ($message) {
             $message->from('lowdown@netsoc.co', 'Lowdown');
             $message->subject('Your Weekly Society Lowdown');
             $message->to($this->user->email);
