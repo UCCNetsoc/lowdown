@@ -58,7 +58,7 @@ class UserController extends Controller
 
         // Validate all input
         $validator = Validator::make( $data, [
-                    'name'  => 'required|min:5',
+                    'name'  => 'required',
                     'email'     => 'email|required|unique:users',
                     'password'  => 'required|confirmed|min:5'
                 ]);
