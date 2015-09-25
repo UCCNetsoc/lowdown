@@ -33,7 +33,7 @@ class EventsController extends Controller
 	 * @return VIEW welcome
 	 */
 	public function index( ){
-		return View::make( 'events.home' );
+		return $this->dayView( 'monday' );
 	}
 
 	public function dayView( $day ){
