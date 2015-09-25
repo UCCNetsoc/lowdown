@@ -17,7 +17,7 @@
 
 		<div class="row">
 			<div class="input-field">
-				{!! Form::label('name', 'Name') !!}
+				{!! Form::label('name', 'First Name') !!}
 				{!! Form::text('name', null, ["class" => "example"] ) !!}
 			</div>
 		</div>
