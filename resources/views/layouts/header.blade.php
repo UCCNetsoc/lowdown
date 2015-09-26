@@ -22,14 +22,18 @@
 
 	@yield('extra-head')
 </head>
-<body>
-    
+<body @if( Route::current()->getPath() == '/' ) class="homepage" @endif>
+    @yield('before-page')
     <header>
     	<nav>
 			<div class="nav-wrapper container">
 			  <a href="{{ URL::to('/home') }}" class="brand-logo">
 			  	<figure>
-					<img src="{{ App\Setting::where('name', 'logo')->first()->setting }}" alt="{{ env( 'SITE_TITLE' ) }}" class="logo">
+					@if( Route::current()->getPath() == '/' )
+						<img src="{{ App\Setting::where('name', 'logo_alt')->first()->setting }}" alt="{{ env( 'SITE_TITLE' ) }}" class="logo">
+					@else
+						<img src="{{ App\Setting::where('name', 'logo')->first()->setting }}" alt="{{ env( 'SITE_TITLE' ) }}" class="logo">
+					@endif
 					<figcaption class="sr-only">
 						<h1> {{ env( 'SITE_TITLE' ) }}</h1>
 					</figcaption>
@@ -41,8 +45,37 @@
 			  		<li><a href="{{ URL::to( 'home' ) }}" class="black-text">Home</a></li>
 			  		<li><a href="{{ URL::route('subscriptions') }}" class="black-text">Subscriptions</a></li>
 			  	@else 
-					<li class="login"><a class="waves-effect waves-light modal-trigger black-text" href="#login-modal">Login</a></li>
-					<li><a href="{{ URL::route('register') }}" class="black-text">Register</a></li>
+			  		<li>
+			  			<a href="{{ URL::route('day', ['day' => 'monday']) }}" class="waves-effect waves-light modal-trigger black-text">
+			  				Monday
+			  			</a>
+			  		</li>
+			  		<li>
+			  			<a href="{{ URL::route('day', ['day' => 'tuesday']) }}" class="waves-effect waves-light modal-trigger black-text">
+			  				Tuesday
+			  			</a>
+			  		</li>
+			  		<li>
+			  			<a href="{{ URL::route('day', ['day' => 'wednesday']) }}" class="waves-effect waves-light modal-trigger black-text">
+			  				Wednesday
+			  			</a>
+			  		</li>
+			  		<li>
+			  			<a href="{{ URL::route('day', ['day' => 'thursday']) }}" class="waves-effect waves-light modal-trigger black-text">
+			  				Thursday
+			  			</a>
+			  		</li>
+			  		<li>
+			  			<a href="{{ URL::route('day', ['day' => 'friday']) }}" class="waves-effect waves-light modal-trigger black-text">
+			  				Friday
+			  			</a>
+			  		</li>
+					<li class="login">
+						<a class="btn waves-effect waves-light modal-trigger black-text" href="#login-modal">Login</a>
+					</li>
+					<li class="register">
+						<a href="{{ URL::route('register') }}" class="btn black-text">Signup</a>
+					</li>
 			  	@endif
 			  </ul>
 

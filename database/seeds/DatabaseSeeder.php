@@ -6,6 +6,7 @@ use App\Setting;
 use App\Society;
 use App\User;
 use App\Event;
+use URL;
 
 use Facebook\FacebookSession;
 use Facebook\FacebookRequest;
@@ -42,6 +43,7 @@ class SettingsSeeder extends Seeder {
         Setting::create(['name' => 'next_society', 'setting' => '1']);
         Setting::create(['name' => 'next_user', 'setting' => '1']);
         Setting::create(['name' => 'logo', 'setting' => 'http://netsoc.co/wp-content/themes/netsoc/images/horizontal.png']);
+        Setting::create(['name' => 'logo_alt', 'setting' => URL::to('/') . '/images/logo_alt.png' ]);
         Setting::create(['name' => 'name', 'setting' => 'UCC Networking, Gaming And Technology Society']);
 
         $this->command->info('Settings table seeded!');
