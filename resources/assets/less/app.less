@@ -1,5 +1,8 @@
 @off-white: #FFFFF8;
-
+@red-accent: #db7c6a;
+@teal-accent: #56a7a1;
+@light-blue-accent: #519cd6;
+@dark-blue-accent: #384556;
 
 /* Utilities */
 .sr-only{
@@ -44,6 +47,38 @@ body{
 		background: none;
 		box-shadow: none;
 		margin-bottom: 30px;
+	}
+	
+	.off-white{
+		background: @off-white;
+	}
+
+	.off-white-text{
+		color: @off-white;
+	}
+
+	.red-accent{
+		background: @red-accent;
+	}
+
+	.red-accent-text{
+		color: @red-accent;
+	}
+
+	.light-blue-accent{
+		background: @light-blue-accent;
+	}
+
+	.light-blue-accent-text{
+		color: @light-blue-accent;
+	}
+
+	.dark-blue-accent{
+		background: @dark-blue-accent;
+	}
+
+	.dark-blue-accent-text{
+		color: @dark-blue-accent;
 	}
 
 	.brand-logo{
@@ -120,6 +155,29 @@ body{
 
 	.welcome-page-parallax{
 		height: 750px;
+	}
+
+	.event-cards .row{
+		margin-bottom: 0px;
+		padding-top: 10px;
+	}
+	
+	#description{
+		background: @teal-accent;
+		padding: 70px 0;
+		color: @off-white;
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	#call-to-action {
+		margin-bottom: 0;
+
+		.card-panel{
+			background: @off-white;
+			margin-top: 40px;
+			margin-bottom: 40px;
+		}
 	}
 }
 

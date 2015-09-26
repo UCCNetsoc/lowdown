@@ -31,7 +31,14 @@ class UserController extends Controller
 	 * @return VIEW welcome
 	 */
 	public function index( ){
-		return View::make( 'welcome' );
+        $all_events = Event::where( 'time', '>', date('Y-m-d H:i:s') )
+                         ->where( 'time', '<', date('Y-m-d H:i:s', time()+604800) );
+
+        $first_six = $all_events->take(6)->get();
+
+        $next_six = $all_events->skip(6)->take(6)->get();
+
+		return View::make( 'welcome' )->with('first_six', $first_six)->with('next_six', $next_six);
 	}
 	
 	/**
