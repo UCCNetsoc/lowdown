@@ -51,7 +51,7 @@ class UpdateEvents extends Job implements SelfHandling, ShouldQueue
 
         $toTake = 200; // Handle 20 societies at once :)
 
-        $store = \App\Setting::where('name', 'last_society')
+        $store = \App\Setting::where('name', 'next_society')
                                   ->first();
         $lastUpdated = $store->setting; // Get last society ID updated;
 
@@ -78,6 +78,7 @@ class UpdateEvents extends Job implements SelfHandling, ShouldQueue
                 foreach($events as $fbEvent){
                     $storedEvent = \App\Event::firstOrNew(['facebook_id' => $fbEvent->id]);
 
+
                     $storedEvent->society_id = $society->id;
                     $storedEvent->title = $fbEvent->name;
                     $storedEvent->time = $fbEvent->start_time;
@@ -90,7 +91,6 @@ class UpdateEvents extends Job implements SelfHandling, ShouldQueue
                     if(array_key_exists("cover", $fbEvent)){
                         $storedEvent->image = $fbEvent->cover->source;
                     }
-
                     $storedEvent->save();
                 }
             }
