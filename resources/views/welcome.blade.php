@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('before-page')
-<div class="parallax-container welcome-page-parallax">
+<div class="parallax-container welcome-page-parallax z-depth-2">
 	<div class="parallax">
 		<video width="100%" autoplay loop style="max-width:100%">
 			<source src="{{URL::to('/')}}/images/video.webm" type="video/webm">
@@ -12,7 +12,7 @@
 @stop
 
 @section('content')
-    <main class="valign-wrapper row welcome-page-hero z-depth-2">
+    <main class="valign-wrapper row welcome-page-hero">
     	<div class="col s12 valign">
     		<hr/>
 	        <div class="s12 center-align">
