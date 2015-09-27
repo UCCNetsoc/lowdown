@@ -7,6 +7,7 @@ use Redirect;
 use Request;
 use Validator;
 use Hash;
+use DB;
 use App\User;
 use App\Society;
 use App\Event;
@@ -32,7 +33,8 @@ class UserController extends Controller
 	 */
 	public function index( ){
         $all_events = Event::where( 'time', '>', date('Y-m-d H:i:s') )
-                         ->where( 'time', '<', date('Y-m-d H:i:s', time()+604800) );
+                         ->where( 'time', '<', date('Y-m-d H:i:s', time()+604800) )
+                         ->orderBy(DB::raw('RAND()'));
 
         $first_six = $all_events->take(6)->get();
 
