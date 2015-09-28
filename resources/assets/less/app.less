@@ -37,8 +37,8 @@ body{
 
 	color: #444;
 
-	h1,h2,h3,h4,h5{
-		font-family: 'Lato', sans-serif;
+	h1,h2,h3,h4,h5,.btn,.btn-large{
+		font-family: 'Roboto', sans-serif;
 	}
 
 	background: @off-white;
@@ -110,22 +110,35 @@ body{
 			text-align: center;
 		}
 	}
-}
 
-.homepage{
 	nav {
 		ul {
 			margin-top: 16px; 
 
-			li a{
-				color: @off-white !important;
-			}
+		}
+
+		.btn{
+			color: @off-white !important;
 		}
 
 		.register{
 			margin-left: 10px;
 		}
 	}
+
+}
+
+.homepage{
+
+	video{
+		opacity:0.2;
+	}
+
+
+	nav ul li a{
+		color: @off-white !important;
+	}
+
 
 	.logo{
 		margin-top: 19px;
@@ -151,10 +164,18 @@ body{
 		hr{
 			background-image: linear-gradient(to right, rgba(255,255,255,0), @off-white, rgba(255,255,255,0));
 		}
+
+		.btn-large{
+			margin-bottom:1em;
+		}
 	}
 
 	.welcome-page-parallax{
 		height: 750px;
+
+		.parallax{
+			background:black;
+		}
 	}
 
 	.event-cards .row{
@@ -168,15 +189,31 @@ body{
 		color: @off-white;
 		margin-top: 0;
 		margin-bottom: 0;
+
+		.material-icons{
+			font-size:inherit;
+		}
 	}
 
 	#call-to-action {
 		margin-bottom: 0;
+		padding:1em;
 
-		.card-panel{
-			background: @off-white;
-			margin-top: 40px;
-			margin-bottom: 40px;
+		.form-wrapper{
+			width:92%;
+			max-width:600px;
+			margin:0 auto;
+			margin-bottom:1em;
+		
+			.input-field{
+				label{
+					color:@off-white;
+				}
+				
+				input{
+					border-bottom: 1px solid @off-white;
+				}
+			}
 		}
 	}
 }

@@ -12,12 +12,13 @@
 @stop
 
 @section('content')
-    <main class="valign-wrapper row welcome-page-hero">
+    <main class="valign-wrapper container row welcome-page-hero">
     	<div class="col s12 valign">
     		<hr/>
 	        <div class="s12 center-align">
 	            <h1>Lowdown.</h1>
-	            <h2>It's what's goin' on.</h2>
+	            <h2>The complete guide to UCC Societies.</h2>
+				<a href="#description" class="btn-large waves-effect waves-light teal lighten-1"><i class="material-icons left">chat</i> Learn More</a>
 	        </div>
 	        <hr/>
 	    </div>
@@ -26,6 +27,7 @@
 </div>
 
 	<section class="event-cards z-depth-2">
+		<div class="container">
 		<div class="row ">
 			@foreach($first_six as $event)
 				<div class="col s12 m6 l4">
@@ -51,47 +53,84 @@
 				</div>
 			@endforeach
 		</div>
+		</div>
 	</section>
 
 	<section id="description" class="row z-depth-2">
 		<div class="container">
 			<h1>What is Lowdown?</h1>
-			<p class="flow-text">Lorem ipsum Laboris dolore do exercitation occaecat tempor quis irure laboris dolore Excepteur laboris incididunt consectetur Duis cillum aute eu dolor non minim voluptate Excepteur incididunt reprehenderit Ut amet pariatur quis officia pariatur Excepteur tempor irure fugiat.</p>
+			<p class="flow-text">It's everything you love in one place; your favourite societies events organised and collected online, sent out to you in a personalised newsletter every week. We're helping societies find their audience, and students find new interests.</p>
+			<div class="what-is-lowdown row">
+				<div class="col s12 m4">
+				  <div class="icon-block">
+					<h2 class="center"><i class="material-icons">hearing</i></h2>
+					<h5 class="center">Always Up To Date</h5>
+
+					<p class="light">Lowdown sources all of its information direct from societies' Facebook pages, so you can be assured if something's happening on campus, we'll hear about it.</p>
+				  </div>
+				</div>
+
+				<div class="col s12 m4">
+				  <div class="icon-block">
+					<h2 class="center"><i class="material-icons">email</i></h2>
+					<h5 class="center">Never Miss A Beat</h5>
+
+					<p class="light">Sign up to Lowdown and get weekly emails about your societies' upcoming events every Sunday. We'll even let you get your favourite society's events on your phone calendar.</p>
+				  </div>
+				</div>
+
+				<div class="col s12 m4">
+				  <div class="icon-block">
+					<h2 class="center">♥</h2>
+					<h5 class="center">Everything You Love</h5>
+
+					<p class="light">Pick and choose the societies you want to follow. Get more of what you care about and what interests you. Discover new societies and get involved with something different.</p>
+				  </div>
+				</div>
+			</div>
+
+			<div class="center">
+				<a href="#call-to-action" class="btn-large waves-effect waves-light teal lighten-1"><i class="material-icons left">thumb_up</i> Sign Me Up!</a>
+			</div>
 		</div>
 	</section>
 
-	<section class="event-cards events z-depth-2">
-		<div class="row ">
-			@foreach($next_six as $event)
-				<div class="col s12 m6 l4">
-					<div class="card">
-						@if( $event->image )
-							<div class="card-image">
-								<a href="https://www.facebook.com/events/{{$event->facebook_id}}">
-									<img src="{{$event->image}}">
-								</a>
+	<section class="event-cards z-depth-2">
+		<div class="container">
+			<div class="row ">
+				@foreach($next_six as $event)
+					<div class="col s12 m6 l4">
+						<div class="card">
+							@if( $event->image )
+								<div class="card-image">
+									<a href="https://www.facebook.com/events/{{$event->facebook_id}}">
+										<img src="{{$event->image}}">
+									</a>
+								</div>
+							@endif
+							<div class="card-content">
+								<h4>{{$event->title}}</h5>
+								<h5>{{$event->society()->first()->name}} Society</h5>
+								<p>{{date('H:i, l j F', strtotime($event->time))}}@if($event->location), <strong>{{$event->location}}</strong>@endif</p>
 							</div>
-						@endif
-						<div class="card-content">
-							<h4>{{$event->title}}</h5>
-							<h5>{{$event->society()->first()->name}} Society</h5>
-							<p>{{date('H:i, l j F', strtotime($event->time))}}@if($event->location), <strong>{{$event->location}}</strong>@endif</p>
-						</div>
-						<div class="card-action">
-						  <a href="https://www.facebook.com/events/{{$event->facebook_id}}">
-						  	Facebook Event
-						  </a>
+							<div class="card-action">
+							  <a href="https://www.facebook.com/events/{{$event->facebook_id}}">
+							  	Facebook Event
+							  </a>
+							</div>
 						</div>
 					</div>
-				</div>
-			@endforeach
+				@endforeach
+			</div>
 		</div>
 	</section>
 
 	<section id="call-to-action" class="row red-accent">
-		<div class="col s12 m4 offset-m4 container card-panel">
+		<div class="container white-text">
 			<h2 class="center-align"> Signup </h2>
-			@include('forms.register')
+			<div class="form-wrapper">
+				@include('forms.register')
+			</div>
 		</div>
 	</section>
 
