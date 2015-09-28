@@ -25,7 +25,7 @@
 <!-- End Parallax container -->
 </div>
 
-	<section class="event-cards events  z-depth-2">
+	<section class="event-cards z-depth-2">
 		<div class="row ">
 			@foreach($first_six as $event)
 				<div class="col s12 m6 l4">
