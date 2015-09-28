@@ -126,8 +126,8 @@
 	</section>
 
 	<section id="call-to-action" class="row red-accent">
-		<div class="container white-text">
-			<h2 class="center-align"> Signup </h2>
+		<div class="container white-text center">
+			<h2> Signup </h2>
 			<div class="form-wrapper">
 				@include('forms.register')
 			</div>
