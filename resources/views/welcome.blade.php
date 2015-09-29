@@ -125,7 +125,7 @@
 		</div>
 	</section>
 
-	<section id="call-to-action" class="row red-accent">
+	<section id="call-to-action" class="row">
 		<div class="container white-text center">
 			<h2> Signup </h2>
 			<div class="form-wrapper">

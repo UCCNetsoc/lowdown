@@ -189,6 +189,10 @@ body{
 	#call-to-action {
 		margin-bottom: 0;
 		padding:1em;
+	    background: linear-gradient(116deg, #210024, #8f001f);
+	    background-position: 0px 0px;
+	    background-size: 400%;
+	    animation:RotatingGradient 8s ease infinite;
 
 		.form-wrapper{
 			width:92%;
@@ -209,3 +213,15 @@ body{
 	}
 }
 
+@keyframes RotatingGradient {
+	0% {
+		background-position:0 50%
+	}
+	50% {
+		background-position:100% 50%
+	}
+	100% {
+		background-position:0 50%
+	}
+
+}
