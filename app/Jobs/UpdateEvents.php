@@ -18,14 +18,16 @@ class UpdateEvents extends Job implements SelfHandling, ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
 
+    private $isSeeding;
+
     /**
-     * Create a new job instance.
-     *
-     * @return void
+     * Create new job instance
+     * @param boolean $isSeeding Whether this is coming from the seeding
+     *                           script or not
      */
-    public function __construct()
+    public function __construct( $isSeeding = false )
     {
-        //
+        $this->isSeeding = $isSeeding;
     }
 
     /**
@@ -35,6 +37,13 @@ class UpdateEvents extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
+      if( $this->isSeeding ){
+        $toTake = 200; // 200 societies
+        $delay = 0; // Immediately
+      } else{
+        $toTake = 20; // 20 societies
+        $delay = 600; // 10 Minutes
+      }
 
         FacebookSession::setDefaultApplication( getenv('FB_ID'), getenv('FB_SECRET') );
         $session = FacebookSession::newAppSession();
@@ -49,7 +58,6 @@ class UpdateEvents extends Job implements SelfHandling, ShouldQueue
           dd($ex);
         }
 
-        $toTake = 20; // Handle 20 societies at once :)
 
         $store = \App\Setting::where('name', 'next_society')
                                   ->first();
@@ -104,9 +112,11 @@ class UpdateEvents extends Job implements SelfHandling, ShouldQueue
 
         $store->save();
 
-        $job = (new \App\Jobs\UpdateEvents())->delay(600);
+        $job = (new \App\Jobs\UpdateEvents())->delay($delay);
 
-        $this->dispatch($job);
+        if( !$this->isSeeding ){
+          $this->dispatch($job);
+        }
 
     }
 }

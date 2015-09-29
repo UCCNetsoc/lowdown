@@ -172,6 +172,6 @@ class SocietiesSeeder extends Seeder {
 class EventsSeeder extends Seeder{
     use Illuminate\Foundation\Bus\DispatchesJobs;
     public function run(){
-       $this->dispatch( new UpdateEvents() );
+       $this->dispatch( new UpdateEvents( $isSeeding = true ) );
     }
 }
