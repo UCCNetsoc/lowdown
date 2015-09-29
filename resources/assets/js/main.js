@@ -27,7 +27,7 @@ $( document ).ready(function($){
     });
 
     // Webcal Link Rewrite
-    if( $(".calendar-button") ){
+    if( $(".calendar-button").length ){
     	var link = $(".calendar-button").attr('href');
 
 		var link = link.replace(window.location.protocol + "//", "webcal://");
