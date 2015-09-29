@@ -47,19 +47,20 @@ class SendEmail extends Job implements SelfHandling, ShouldQueue
                               ->where( 'time', '<', date('Y-m-d H:i:s', time()+604800) );
 
         $allEvents = $this->events->toArray();
-        $random_event = $allEvents[ array_rand( $allEvents, 1 ) ];
+        if(count($allEvents)){
+          $random_event = $allEvents[ array_rand( $allEvents, 1 ) ];
 
-        $data = [
-                    'user' => $this->user, 
-                    'events' => $events, 
-                    'random_event' => $random_event
-                ];
+          $data = [
+                      'user' => $this->user, 
+                      'events' => $events, 
+                      'random_event' => $random_event
+                  ];
 
-        Mail::send('emails.weekly', $data, function ($message) {
-            $message->from('lowdown@netsoc.co', 'Lowdown');
-            $message->subject('Your Weekly Society Lowdown');
-            $message->to($this->user->email);
-        });
-
+          Mail::send('emails.weekly', $data, function ($message) {
+              $message->from('lowdown@netsoc.co', 'Lowdown');
+              $message->subject('Your Weekly Society Lowdown');
+              $message->to($this->user->email);
+          });
+        }
     }
 }

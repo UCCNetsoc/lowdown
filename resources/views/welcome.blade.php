@@ -26,6 +26,8 @@
 <!-- End Parallax container -->
 </div>
 
+<main>
+@if(count($first_six) == 6)
 	<section class="event-cards z-depth-2">
 		<div class="container">
 		<div class="row ">
@@ -55,6 +57,7 @@
 		</div>
 		</div>
 	</section>
+@endif
 
 	<section id="description" class="row z-depth-2">
 		<div class="container">
@@ -95,6 +98,7 @@
 		</div>
 	</section>
 
+@if(count($next_six) == 6)
 	<section class="event-cards z-depth-2">
 		<div class="container">
 			<div class="row ">
@@ -124,6 +128,7 @@
 			</div>
 		</div>
 	</section>
+@endif
 
 	<section id="call-to-action" class="row">
 		<div class="container white-text center">
