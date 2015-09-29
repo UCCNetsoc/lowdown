@@ -6,6 +6,7 @@ use Response;
 use Redirect;
 use Request;
 use Validator;
+use Crypt;
 use App\User;
 use App\Event;
 use App\Subscription;
@@ -28,6 +29,18 @@ class EmailController extends Controller
 	public function index( ){
 		$user = Auth::user();
 		$this->dispatch( new SendEmail($user) );
-		return View::make( 'welcome' );
+		// return View::make( 'welcome' );
+	}
+
+	public function unsubscribe( $user_id ){
+		$id = Crypt::decrypt( $user_id );
+
+		$user = User::find( $id );
+		$subscriptions = $user->subscriptions()->get();
+		foreach ($subscriptions as $subscription) {
+			$currentSubscription = Subscription::find($subscription->id);
+			$currentSubscription->delete();
+		}
+		return Redirect::to('/');
 	}
 }
