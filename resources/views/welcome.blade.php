@@ -93,7 +93,7 @@
 			</div>
 
 			<div class="center">
-				<a href="#call-to-action" class="btn-large waves-effect waves-light teal lighten-1"><i class="material-icons left">thumb_up</i> Sign Me Up!</a>
+				<a href="#call-to-action" class="btn-large waves-effect waves-light red-accent lighten-1"><i class="material-icons left">thumb_up</i> Sign Me Up!</a>
 			</div>
 		</div>
 	</section>
