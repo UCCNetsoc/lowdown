@@ -13,6 +13,9 @@ use App\Subscription;
 use App\Society;
 use App\Setting;
 
+use DateTime;
+use DateInterval;
+
 use Crypt;
 
 use App\Jobs\UpdateEvents;
@@ -33,7 +36,7 @@ class EventsController extends Controller
 	 * @return VIEW welcome
 	 */
 	public function index( ){
-		return $this->dayView( 'monday' );
+		return $this->dayView( 'today' );
 	}
 
 	public function dayView( $day ){
@@ -96,6 +99,7 @@ class EventsController extends Controller
 				break;
 			
 			default:
+				$day = str_replace("_", " ", $day);
 				if(  ( $time = strtotime($day) ) === false ){
 					return Redirect::to('home')->with('message', 'Oops, this page not found!');
 				}
@@ -113,5 +117,45 @@ class EventsController extends Controller
 
 		return ['day' => $day, 'events' => $events];
 
+	}
+
+	public function calendar( $user_id ){
+		$user_id = Crypt::decrypt($user_id);
+
+        $soc_ids = DB::table('subscriptions')
+					 ->where('user_id', $user_id)
+			 		 ->lists('society_id');
+
+        $events = Event::where('time', '>', date('Y-m-d H:i:s'))
+        	           ->whereIn('society_id', $soc_ids)->get();
+
+		$vCalendar = new \Eluceo\iCal\Component\Calendar('lowdown.netsoc.co');
+
+		foreach($events as $event){
+			$vEvent = new \Eluceo\iCal\Component\Event();
+
+			$eventTime = new DateTime($event->time);
+			$endTime = $eventTime;
+			$endTime->add(new DateInterval('PT1H'));
+
+			$eventSummary = $event->society()->first()->name . ' Society: '
+							. $event->title;
+
+			$vEvent
+			    ->setDtStart($eventTime)
+			    ->setDtEnd($endTime)
+			    ->setSummary($eventSummary);
+
+			if($event->location){
+				$vEvent->setLocation($event->location);
+			}
+
+			$vCalendar->addComponent($vEvent);
+		}
+
+		header('Content-Type: text/calendar; charset=utf-8');
+		header('Content-Disposition: attachment; filename="cal.ics"');
+
+		echo $vCalendar->render();
 	}
 }

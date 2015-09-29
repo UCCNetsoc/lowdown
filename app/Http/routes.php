@@ -34,6 +34,8 @@ Route::group(['prefix' => 'events'], function()
 	Route::get('/{day}/json', ['as' => 'day/json', 'uses' => 'EventsController@dayJSON']);
 });
 
+Route::get('calendar/{id}', ['as' => 'calendar/id', 'uses' => 'EventsController@calendar']);
+
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function()
 {
 	Route::get('/subscriptions', ['as' => 'subscriptions', 'uses' => 'UserController@subscriptions']);
