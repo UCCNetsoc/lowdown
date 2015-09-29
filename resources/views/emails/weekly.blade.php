@@ -323,20 +323,38 @@ ul.sidebar li a h1,ul.sidebar li a h2,ul.sidebar li a h3,ul.sidebar li a h4,ul.s
 											</a>
 										
 									</li>
+
+
+									<?php $this_week = new DateTime( date('Y-m-d\TH:i:sP', strtotime( 'this sunday' ) ) ); ?>
 									<!-- Monday Link -->
-									<li style="background:#EB7260;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-left: 5px;list-style-position: inside;display: block;"><a class="" style="margin: 0;padding: 10px 16px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;color: #FFF;text-decoration: none;margin-right: 10px;cursor: pointer;display: block;" href="<?php echo URL::route('day', ['day' => 'monday']); ?>">Monday &raquo;</a></li>
+									<li style="background:#EB7260;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-left: 5px;list-style-position: inside;display: block;"><a class="" style="margin: 0;padding: 10px 16px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;color: #FFF;text-decoration: none;margin-right: 10px;cursor: pointer;display: block;" href="<?php 
+
+									$monday = $this_week->add( date_interval_create_from_date_string('1 day') );
+									echo URL::route('day/id', ['day' => $monday->format('Y-m-d'), 'id' => Crypt::encrypt($user->id)]); ?>">Monday &raquo;</a></li>
 									
 									<!-- Tuesday Link -->
-									<li style="background: #5CB2EA;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-left: 5px;list-style-position: inside;display: block;"><a class="" style="margin: 0;padding: 10px 16px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;color: #FFF;text-decoration: none;margin-right: 10px;cursor: pointer;display: block;" href="<?php echo URL::route('day', ['day' => 'tuesday']); ?>">Tuesday &raquo;</a></li>
+									<li style="background: #5CB2EA;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-left: 5px;list-style-position: inside;display: block;"><a class="" style="margin: 0;padding: 10px 16px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;color: #FFF;text-decoration: none;margin-right: 10px;cursor: pointer;display: block;" href="<?php 
+
+									$tuesday = $this_week->add( date_interval_create_from_date_string('1 day') );
+									echo URL::route('day/id', ['day' => $tuesday->format('Y-m-d'), 'id' => Crypt::encrypt($user->id)]); ?>">Tuesday &raquo;</a></li>
 									
 									<!-- Wednesday Link -->
-									<li style="background: #354458;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-left: 5px;list-style-position: inside;display: block;"><a class="" style="margin: 0;padding: 10px 16px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;color: #FFF;text-decoration: none;margin-right: 10px;cursor: pointer;display: block;" href="<?php echo URL::route('day', ['day' => 'wednesday']); ?>">Wednesday &raquo;</a></li>
+									<li style="background: #354458;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-left: 5px;list-style-position: inside;display: block;"><a class="" style="margin: 0;padding: 10px 16px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;color: #FFF;text-decoration: none;margin-right: 10px;cursor: pointer;display: block;" href="<?php 
+
+									$wednesday = $this_week->add( date_interval_create_from_date_string('1 day') );
+									echo URL::route('day/id', ['day' => $wednesday->format('Y-m-d'), 'id' => Crypt::encrypt($user->id)]); ?>">Wednesday &raquo;</a></li>
 									
 									<!-- Thursday -->
-									<li style="background: #EB7260;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-left: 5px;list-style-position: inside;display: block;"><a class="" style="margin: 0;padding: 10px 16px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;color: #FFF;text-decoration: none;margin-right: 10px;cursor: pointer;display: block;" href="<?php echo URL::route('day', ['day' => 'thursday']); ?>">Thursday &raquo;</a></li>
+									<li style="background: #EB7260;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-left: 5px;list-style-position: inside;display: block;"><a class="" style="margin: 0;padding: 10px 16px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;color: #FFF;text-decoration: none;margin-right: 10px;cursor: pointer;display: block;" href="<?php 
+
+									$thursday = $this_week->add( date_interval_create_from_date_string('1 day') );
+									echo URL::route('day/id', ['day' => $thursday->format('Y-m-d'), 'id' => Crypt::encrypt($user->id)]); ?>">Thursday &raquo;</a></li>
 									
 									<!-- Friday -->
-									<li style="background:#5CB2EA;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-left: 5px;list-style-position: inside;display: block;"><a class="" style="margin: 0;padding: 10px 16px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;color: #FFF;text-decoration: none;margin-right: 10px;cursor: pointer;display: block;" href="<?php echo URL::route('day', ['day' => 'friday']); ?>">Friday &raquo;</a></li>
+									<li style="background:#5CB2EA;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-left: 5px;list-style-position: inside;display: block;"><a class="" style="margin: 0;padding: 10px 16px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;color: #FFF;text-decoration: none;margin-right: 10px;cursor: pointer;display: block;" href="<?php 
+
+									$friday = $this_week->add( date_interval_create_from_date_string('1 day') );
+									echo URL::route('day/id', ['day' => $friday->format('Y-m-d'), 'id' => Crypt::encrypt($user->id)]); ?>">Friday &raquo;</a></li>
 									
 								</ul>
 								
