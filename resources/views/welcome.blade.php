@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('before-page')
-<div class="parallax-container welcome-page-parallax z-depth-2">
+<header class="parallax-container welcome-page-parallax z-depth-2">
 	<div class="parallax">
 		<video width="100%" autoplay loop style="max-width:100%">
 			<source src="{{URL::to('/')}}/images/video.webm" type="video/webm">
@@ -12,7 +12,7 @@
 @stop
 
 @section('content')
-    <main class="valign-wrapper container row welcome-page-hero">
+    <div class="valign-wrapper container row welcome-page-hero">
     	<div class="col s12 valign">
     		<hr/>
 	        <div class="s12 center-align">
@@ -22,9 +22,9 @@
 	        </div>
 	        <hr/>
 	    </div>
-    </main>
+    </div>
 <!-- End Parallax container -->
-</div>
+</header>
 
 <main>
 @if(count($first_six) == 6)
@@ -138,9 +138,16 @@
 			</div>
 		</div>
 	</section>
-
-@stop
+</main>
+@endsection
 
 @section('after-page')
-
-@stop
+<footer class="page-footer">
+  <div class="footer-copyright">
+    <div class="container">
+    © {{date('Y')}} UCC Netsoc
+    <a class="grey-text text-lighten-4 right" href="https://github.com/UCCNetworkingSociety/lowdown/blob/master/LICENSE">MIT Licence</a>
+    </div>
+  </div>
+</footer>
+@endsection
