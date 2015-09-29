@@ -1,9 +1,12 @@
 $( document ).ready(function($){
+
+	// Materialize Setup
 	$(".button-collapse").sideNav();
 	$('.modal-trigger').leanModal();
 	$('.tooltipped').tooltip({delay: 50});
 	$('.parallax').parallax();
 
+	// Smooth Scrolling
     $(document.body).on('click', 'a[href*=#]:not([href=#])', function (e) {
         e.preventDefault();
         if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
@@ -22,6 +25,19 @@ $( document ).ready(function($){
             }
         }
     });
+
+    // Webcal Link Rewrite
+    if( $(".calendar-button") ){
+    	var link = $(".calendar-button").attr('href');
+
+		var link = link.replace(window.location.protocol + "//", "webcal://");
+		
+		if(navigator.platform.toUpperCase().indexOf('LINUX')>=0 || navigator.platform.toUpperCase().indexOf('WIN')>=0){
+			link = "https://www.google.com/calendar/render?cid=" + link;
+		}
+
+		$('.calendar-button').attr('href', link);
+    }
 });
 
 /*
