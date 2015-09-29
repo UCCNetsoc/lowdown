@@ -129,15 +129,22 @@ body{
 
 .homepage{
 
+
 	video{
 		opacity:0.2;
 	}
 
 
-	nav ul li a{
-		color: @off-white !important;
-	}
+	nav ul li {
+		&>a {
+			color: @off-white !important;
+		}
 
+		.dropdown-content li a{
+			color: #26A69A !important;
+		}
+	}
+	
 
 	.welcome-page-hero{
 		height: 400px;
