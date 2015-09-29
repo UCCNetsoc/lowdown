@@ -29,18 +29,26 @@ class EmailController extends Controller
 	public function index( ){
 		$user = Auth::user();
 		$this->dispatch( new SendEmail($user) );
-		// return View::make( 'welcome' );
 	}
 
 	public function unsubscribe( $user_id ){
 		$id = Crypt::decrypt( $user_id );
 
 		$user = User::find( $id );
-		$subscriptions = $user->subscriptions()->get();
-		foreach ($subscriptions as $subscription) {
-			$currentSubscription = Subscription::find($subscription->id);
-			$currentSubscription->delete();
-		}
-		return Redirect::to('/');
+		$user->unsubscribed_email = "yes";
+		$user->save();
+
+		return Redirect::to('/user/subscriptions');
 	}
+
+	public function resubscribe( $user_id ){
+		$id = Crypt::decrypt( $user_id );
+
+		$user = User::find( $id );
+		$user->unsubscribed_email = "no";
+		$user->save();
+
+		return Redirect::to('/user/subscriptions');
+	}
+
 }

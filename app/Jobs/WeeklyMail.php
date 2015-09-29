@@ -30,8 +30,8 @@ class WeeklyMail extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        for(User::all() as $user){
-            $this->dispatch( new SendEmail($user) )->delay(30);
+        for(User::where('unsubscribed_email', 'no') as $user){
+            $this->dispatch( new SendEmail($user) );
         }
     }
 }

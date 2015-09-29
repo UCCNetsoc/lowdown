@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('password', 60);
             $table->enum('processing', ['yes', 'no']);
+            $table->enum('unsubscribed_email', ['no', 'yes']);
             $table->rememberToken();
             $table->timestamps();
         });
