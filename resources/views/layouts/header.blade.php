@@ -40,32 +40,35 @@
 				</figure>
 			  </a>
 			  <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-			  <ul class="right hide-on-med-and-down">
+			  <ul id="dropdown1" class="dropdown-content">
 		  		<li>
-		  			<a href="{{ URL::route('day', ['day' => 'monday']) }}" class="waves-effect waves-light modal-trigger black-text">
+		  			<a href="{{ URL::route('day', ['day' => 'monday']) }}">
 		  				Monday
 		  			</a>
 		  		</li>
 		  		<li>
-		  			<a href="{{ URL::route('day', ['day' => 'tuesday']) }}" class="waves-effect waves-light modal-trigger black-text">
+		  			<a href="{{ URL::route('day', ['day' => 'tuesday']) }}">
 		  				Tuesday
 		  			</a>
 		  		</li>
 		  		<li>
-		  			<a href="{{ URL::route('day', ['day' => 'wednesday']) }}" class="waves-effect waves-light modal-trigger black-text">
+		  			<a href="{{ URL::route('day', ['day' => 'wednesday']) }}">
 		  				Wednesday
 		  			</a>
 		  		</li>
 		  		<li>
-		  			<a href="{{ URL::route('day', ['day' => 'thursday']) }}" class="waves-effect waves-light modal-trigger black-text">
+		  			<a href="{{ URL::route('day', ['day' => 'thursday']) }}">
 		  				Thursday
 		  			</a>
 		  		</li>
 		  		<li>
-		  			<a href="{{ URL::route('day', ['day' => 'friday']) }}" class="waves-effect waves-light modal-trigger black-text">
+		  			<a href="{{ URL::route('day', ['day' => 'friday']) }}">
 		  				Friday
 		  			</a>
 		  		</li>
+				</ul>
+			  <ul class="right hide-on-med-and-down">
+			  	<li><a class="dropdown-button black-text" href="#!" data-activates="dropdown1">Events<i class="material-icons right">arrow_drop_down</i></a></li>
 			  	@if( Auth::check( ) )
 			  		<li class="login"><a href="{{ URL::route('subscriptions') }}" class="btn waves-effect waves-light">Subscriptions</a></li>
 			  	@else 

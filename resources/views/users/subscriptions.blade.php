@@ -2,7 +2,7 @@
 
 @section('content')
 	<main class="row container">
-		<p class="col s3 right"><a class="calendar-button btn" href='{{URL::to("/calendar/" . Crypt::encrypt(Auth::user()->id))}}' ><i class="material-icons left">today</i> Download Calendar</a></p>
+		<p class="col s12 m3 right"><a class="calendar-button btn right" href='{{URL::to("/calendar/" . Crypt::encrypt(Auth::user()->id))}}' ><i class="material-icons left">today</i> Get Calendar</a></p>
 		<p class="col s8">Choose which societies you'd like to hear from. 
 			<a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="The idea of the lowdown is to learn about new society events, we want to encourage that more than anything.">
 				Why are all the societies ticked by default?
