@@ -3,7 +3,10 @@
 namespace App\Exceptions;
 
 use Exception;
+use Response;
+use View;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\Debug\ExceptionHandler as SymfonyDisplayer;
 
 class Handler extends ExceptionHandler
 {
@@ -39,5 +42,24 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $e)
     {
         return parent::render($request, $e);
+    }
+
+    /**
+     * Convert the given exception into a Response instance.
+     *
+     * @param \Exception $e
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected function convertExceptionToResponse(Exception $e)
+    {
+        $debug = env('APP_DEBUG');
+        dd( $debug);
+        if ($debug == 'true') {
+            dd('stop');
+            return (new SymfonyDisplayer($debug))->createResponse($e);
+        }
+
+        return response()->view('errors.404', ['expection' => $e], 500);
     }
 }

@@ -25,14 +25,14 @@
 
 	@yield('extra-head')
 </head>
-<body @if( Route::current()->getPath() == '/' ) class="homepage" @endif>
+<body @if( Route::current() && Route::current()->getPath() == '/' ) class="homepage" @endif>
     @yield('before-page')
     <header>
     	<nav>
 			<div class="nav-wrapper container">
 			  <a href="{{ URL::to('/home') }}" class="brand-logo">
 			  	<figure>
-					@if( Route::current()->getPath() == '/' )
+					@if( Route::current() && Route::current()->getPath() == '/' )
 						{{-- If is the front page, use the alternate logo --}}
 						<img src="{{ App\Setting::where('name', 'logo_alt')->first()->setting }}" alt="{{ env( 'SITE_TITLE' ) }}" class="logo">
 					@else
