@@ -398,19 +398,5 @@ ul.sidebar li a h1,ul.sidebar li a h2,ul.sidebar li a h3,ul.sidebar li a h4,ul.s
 	</tr>
 </table><!-- /FOOTER -->
 
-@foreach($events as $event)
-	<script type="application/ld+json">
-	{
-	  "@context": "http://schema.org",
-	  "@type": "Event",
-	  "name": "{{$event->society()->first()->name}} Society: {{$event->title}}",
-	  @if($event->location)
-	  	"location": "{{$event->location}}",
-	  @endif
-	  "startDate": "{{date('c', strtotime($event->time))}}"
-	}
-	</script>
-@endforeach
-
 </body>
 </html>
