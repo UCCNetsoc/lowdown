@@ -73,6 +73,9 @@ php artisan migrate
 
 # Fetch initial data (the first society events)
 php artisan db:seed
+
+# Create queue table
+php artisan queue:table
 ```
 
 ### Node, Gulp and LESS
