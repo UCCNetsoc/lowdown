@@ -1,0 +1,22 @@
+/* TEAM */
+
+Developer: Evan Smith
+Site: http://iamevan.me
+Twitter: @TheJokersThief
+
+Developer: Colm Cahalane
+Site: http://colm.cf
+Twitter: @ovrplyd
+
+/* THANKS */
+
+Everyone on the UCC Netsoc team, the people who come to our events,
+the Intersocs community (and Redbrick in particular <3) and those who
+keep the dream alive. 1108∞.
+
+/* SITE */
+
+Built with the Laravel framework for PHP, Materalize.css, and good 
+old-fashioned JS libraries like jQuery.matchHeight and Masonry.js.
+
+Major thanks also due to Eluceo's iCal library and Facebook's PHP SDK.
