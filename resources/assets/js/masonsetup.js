@@ -5,7 +5,7 @@ $(document).ready(function(){
 			// options...
 			itemSelector: '.col'
 		});
-	}, 200);
+	}, 1000);
 
 	// On Homepage, use MatchHeight
 	
