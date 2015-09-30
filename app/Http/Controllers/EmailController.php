@@ -16,15 +16,6 @@ use App\Jobs\SendEmail;
 
 class EmailController extends Controller
 {
-	
-/*
-|--------------------------------------------------------------------------
-| User Controller
-|--------------------------------------------------------------------------
-|
-| 
-|
-*/
 
 	public function unsubscribe( $user_id ){
 		$id = Crypt::decrypt( $user_id );
