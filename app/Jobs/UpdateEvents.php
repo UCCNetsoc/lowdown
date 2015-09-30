@@ -91,7 +91,11 @@ class UpdateEvents extends Job implements SelfHandling, ShouldQueue
                     $storedEvent->title = $fbEvent->name;
                     $storedEvent->time = $fbEvent->start_time;
                     if(array_key_exists("description", $fbEvent) ){
-                        $storedEvent->description = $fbEvent->description;
+                        $description = substr($fbEvent->description, 0, 500);
+                        if( strlen($description) < strlen($fbEvent->description) ){
+                            $description .= "…";
+                        }
+                        $storedEvent->description = $description;
                     }
                     if(array_key_exists("location", $fbEvent) ){
                         $storedEvent->location = $fbEvent->location;
