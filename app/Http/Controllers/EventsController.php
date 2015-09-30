@@ -119,6 +119,41 @@ class EventsController extends Controller
 
 	}
 
+	public function thisWeekJSON(){
+		// Look at how amazingly hacky this is like holy shit
+		$mondayStartOfWeek = strtotime("last Monday", strtotime("tomorrow"));
+		$endOfWeek = strtotime("next week", $mondayStartOfWeek);
+
+		return Event::where('time', '>', date('Y-m-d H:i:s', $mondayStartOfWeek))
+					->where('time', '<', date('Y-m-d H:i:s', $endOfWeek))
+					->get();
+	}
+
+	public function thisWeek(){
+		$mondayStartOfWeek = strtotime("last Monday", strtotime("tomorrow"));
+		$endOfWeek = strtotime("next week", $mondayStartOfWeek);
+
+		$qry = Event::where('time', '>', date('Y-m-d H:i:s', $mondayStartOfWeek))
+					->where('time', '<', date('Y-m-d H:i:s', $endOfWeek));
+
+		if( Auth::check() ){
+	        $soc_ids = DB::table('subscriptions')
+			 ->where('user_id', Auth::user()->id)
+			 ->lists('society_id');
+
+			 $qry = $qry->whereIn('society_id', $soc_ids);
+		}
+
+		$events = $qry->orderBy('time')->get();
+
+		return view('events.day', ['day' => "This week!",
+								     'events' => $events ]);
+
+	}
+
+
+
+
 	public function calendar( $user_id ){
 		$user_id = Crypt::decrypt($user_id);
 
