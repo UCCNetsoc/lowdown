@@ -62,7 +62,7 @@ class WeeklyMail extends Job implements SelfHandling, ShouldQueue
                            ->get();
 
         foreach($all_events as $event){
-            $request = new FacebookRequest($session, 'GET', "/events/" . $event->facebook_id);
+            $request = new FacebookRequest($session, 'GET', "/" . $event->facebook_id);
 
             try{
                 $response = $request->execute();
