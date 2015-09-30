@@ -25,7 +25,7 @@ class EventsController extends Controller
 	
 /*
 |--------------------------------------------------------------------------
-| User Controller
+| Events Controller
 |--------------------------------------------------------------------------
 |
 | 
@@ -58,10 +58,22 @@ class EventsController extends Controller
 								  'events' => $events]);
 	}
 
+	/**
+	 * Outputs events for a day as json
+	 * @param  string $day
+	 * @return JSON
+	 */
 	public function dayJSON( $day ){
 		return $this->eventsForDay($day)['events']->get();
 	}
 
+	/**
+	 * Creates a view of events for a specific day
+	 * depending on the users subscriptions
+	 * @param  string 		$day
+	 * @param  crypt(int) 	$id
+	 * @return VIEW  events.day
+	 */
 	public function dayViewForUser( $day, $id ){
 		$id = Crypt::decrypt($id);
 
@@ -82,6 +94,11 @@ class EventsController extends Controller
 
 	}
 
+	/**
+	 * Gets the events for a specific day
+	 * @param  [type] $day [description]
+	 * @return [type]      [description]
+	 */
 	public function eventsForDay($day){
 		$day = strtolower($day);
 		$time = time();
@@ -100,6 +117,7 @@ class EventsController extends Controller
 			
 			default:
 				$day = str_replace("_", " ", $day);
+				// Process string as a date but if it's malformed, return 404
 				if(  ( $time = strtotime($day) ) === false ){
 					return Redirect::to('home')->with('message', 'Oops, this page not found!');
 				}
