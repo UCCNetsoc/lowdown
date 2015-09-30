@@ -10,7 +10,7 @@
 	<div class="row">
 		@foreach($events as $event)
 			<div class="col s12 m6 l4">
-				<div class="card">
+				<div class="card hoverable">
 					@if( $event->image )
 						<div class="card-image">
 							<a href="https://www.facebook.com/events/{{$event->facebook_id}}">
