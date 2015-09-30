@@ -153,22 +153,28 @@ class UserController extends Controller
         return Redirect::route( 'login' )->withInput( );
     }
 
+    /**
+     * Allows users to update their society subscriptions
+     * @return VIEW users.subscriptions
+     */
     public function subscriptions( ){
         if( Auth::user()->processing == 'yes' ){
+            // If the default list is still being added, show
+            // a loading message
             header("Refresh:10");
             return View::make('preparing-account');
         }
 
         $societies = Society::all( );
-
-        $subscriptions = User::find(Auth::user()->id)->subscriptions( );
+        $subscriptions = User::find( Auth::user()->id )->subscriptions( );
         $subscriptions = $subscriptions->get();
 
         foreach ($subscriptions as $subscription) {
-
+            // For every subscription a user HAS, mark it as checked
             $societies[$subscription->society_id - 1]->checked = "checked";
         }
 
+        // Get total number of societies
         $numberOfSocieties = Setting::where('name', 'number_of_societies')->first()->setting;
 
         return View::make('users.subscriptions')
@@ -176,6 +182,10 @@ class UserController extends Controller
                     ->with('numberOfSocieties', $numberOfSocieties);
     }
 
+    /**
+     * Handles updating subscriptions
+     * @return REDIRECT subscriptions
+     */
     public function updateSubscriptions( ){
         $data = Request::only(['allSubscriptions']);
 
