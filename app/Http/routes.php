@@ -38,6 +38,8 @@ Route::group(['prefix' => 'events'], function()
 	Route::get('/{day}/{id}', ['as' => 'day/id', 'uses' => 'EventsController@dayViewForUser']);
 });
 
+Route::get('event/{id}/calendar', ['as' => 'event/id/calendar', 'uses' => 'EventsController@eventAsICS']);
+
 Route::get('calendar/{id}', ['as' => 'calendar/id', 'uses' => 'EventsController@calendar']);
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function()

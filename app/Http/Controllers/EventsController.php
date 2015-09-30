@@ -151,8 +151,40 @@ class EventsController extends Controller
 
 	}
 
+	public function eventAsICS( $event_id ){
+		$vCalendar = new \Eluceo\iCal\Component\Calendar('lowdown.netsoc.co');
 
+		try{
+			$event = Event::findOrFail($event_id);
+		} catch (\Exception $e) {
+			return $this->dayView( 'today' );
+		}
 
+		$vEvent = new \Eluceo\iCal\Component\Event();
+
+		$eventTime = new DateTime($event->time);
+		$endTime = $eventTime;
+		$endTime->add(new DateInterval('PT1H'));
+
+		$eventSummary = $event->society()->first()->name . ' Society: '
+						. $event->title;
+
+		$vEvent
+		    ->setDtStart($eventTime)
+		    ->setDtEnd($endTime)
+		    ->setSummary($eventSummary);
+
+		if($event->location){
+			$vEvent->setLocation($event->location);
+		}
+
+		$vCalendar->addComponent($vEvent);
+
+		header('Content-Type: text/calendar; charset=utf-8');
+		header('Content-Disposition: attachment; filename="cal.ics"');
+
+		echo $vCalendar->render();
+	}
 
 	public function calendar( $user_id ){
 		$user_id = Crypt::decrypt($user_id);
