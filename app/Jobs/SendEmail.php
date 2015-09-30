@@ -49,6 +49,7 @@ class SendEmail extends Job implements SelfHandling, ShouldQueue
 
           $allEvents = $this->events->toArray();
           if(count($allEvents)){
+
             $random_event = $allEvents[ array_rand( $allEvents, 1 ) ];
 
             $data = [
