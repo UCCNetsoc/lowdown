@@ -167,7 +167,7 @@ class UserController extends Controller
             return View::make('preparing-account');
         }
 
-        $societies = Society::all( );
+        $societies = Society::orderBy('name')->get();
         $subscriptions = User::find( Auth::user()->id )->subscriptions( );
         $subscriptions = $subscriptions->get();
 
