@@ -43,7 +43,7 @@ DB_PASSWORD=root
 
 CACHE_DRIVER=file
 SESSION_DRIVER=file
-QUEUE_DRIVER=sync
+QUEUE_DRIVER=database
 
 MAIL_DRIVER=smtp
 MAIL_HOST=smtp.sendgrid.net
