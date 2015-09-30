@@ -31,6 +31,10 @@
 					  <a href="https://www.facebook.com/events/{{$event->facebook_id}}">
 					  	Facebook Event
 					  </a>
+					 <a href="{{URL::to('/event/' . $event->id . '/calendar')}}" class="calendar-button">
+					  	Add To Calendar
+					 </a>
+
 					</div>
 				</div>
 			</div>

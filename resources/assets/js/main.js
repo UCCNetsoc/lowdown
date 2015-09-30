@@ -28,15 +28,18 @@ $( document ).ready(function($){
 
     // Webcal Link Rewrite
     if( $(".calendar-button").length ){
-    	var link = $(".calendar-button").attr('href');
 
-		var link = link.replace(window.location.protocol + "//", "webcal://");
-		
-		if(navigator.platform.toUpperCase().indexOf('LINUX')>=0 || navigator.platform.toUpperCase().indexOf('WIN')>=0){
-			link = "https://www.google.com/calendar/render?cid=" + link;
-		}
+    	$(".calendar-button").each(function(){
+	    	var link = $(this).attr('href');
 
-		$('.calendar-button').attr('href', link);
+			var link = link.replace(window.location.protocol + "//", "webcal://");
+			
+			if(navigator.platform.toUpperCase().indexOf('LINUX')>=0 || navigator.platform.toUpperCase().indexOf('WIN')>=0){
+				link = "https://www.google.com/calendar/render?cid=" + link;
+			}
+
+			$(this).attr('href', link);
+    	});
     }
 });
 
