@@ -1,4 +1,7 @@
 @extends('layouts.default')
+@section('title')
+Events for {{$day}}
+@endsection
 
 
 @section('content')
