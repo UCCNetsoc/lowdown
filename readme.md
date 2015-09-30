@@ -61,6 +61,8 @@ BASE_URL=http://lowdown.dev
 
 FB_ID=123456789
 FB_SECRET=aaaabbbb11111
+
+BUGSNAG_API_KEY=aaaabbbb11111
 ```
 
 #### Laravel Migration
