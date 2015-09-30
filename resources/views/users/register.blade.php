@@ -16,7 +16,7 @@
 @section('content')
 
 	<main class="row container">
-		<section class="card-panel white col m6 offset-m3">
+		<section class="card-panel register-card white col s12 l6 offset-l3">
 			<h3 class="center-align"> Register </h3>
 			@include('forms.register')
 
