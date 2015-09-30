@@ -1,5 +1,8 @@
 @extends('layouts.default')
 
+@section('title')
+Events for {{$society_name}}
+@endsection
 
 @section('content')
 <main class="container events">
