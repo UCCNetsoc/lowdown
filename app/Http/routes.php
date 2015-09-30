@@ -33,6 +33,8 @@ Route::group(['prefix' => 'events'], function()
 	Route::get('/this-week.json', ['as' => 'this-week.json', 'uses' => 'EventsController@thisWeekJSON']);
 	Route::get('/this-week', ['as' => 'this-week.json', 'uses' => 'EventsController@thisWeek']);
 
+	Route::get('/update', ['as' => 'update', 'uses' => 'EventsController@update']);
+
 	Route::get('/{day}', ['as' => 'day', 'uses' => 'EventsController@dayView']);
 	Route::get('/{day}/json', ['as' => 'day/json', 'uses' => 'EventsController@dayJSON']);
 	Route::get('/{day}/{id}', ['as' => 'day/id', 'uses' => 'EventsController@dayViewForUser']);

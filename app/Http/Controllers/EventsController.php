@@ -13,12 +13,13 @@ use App\Subscription;
 use App\Society;
 use App\Setting;
 
+use App\Jobs;
+use App\Jobs\UpdateEvents;
+
 use DateTime;
 use DateInterval;
 
 use Crypt;
-
-use App\Jobs\UpdateEvents;
 
 class EventsController extends Controller
 {
@@ -145,6 +146,14 @@ class EventsController extends Controller
 		return Event::where('time', '>', date('Y-m-d H:i:s', $mondayStartOfWeek))
 					->where('time', '<', date('Y-m-d H:i:s', $endOfWeek))
 					->get();
+	}
+
+	public function update(){
+		//Dispatches a job to update the events list.
+
+		$this->dispatch(new UpdateEvents());
+		echo "dispatched";
+		die();
 	}
 
 	public function thisWeek(){
