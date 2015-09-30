@@ -54,9 +54,8 @@ class Handler extends ExceptionHandler
     protected function convertExceptionToResponse(Exception $e)
     {
         $debug = env('APP_DEBUG');
-        dd( $debug);
+
         if ($debug == 'true') {
-            dd('stop');
             return (new SymfonyDisplayer($debug))->createResponse($e);
         }
 
