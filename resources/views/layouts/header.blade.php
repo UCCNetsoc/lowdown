@@ -73,7 +73,9 @@
 		  		</li>
 				</ul>
 			  <ul class="right hide-on-med-and-down">
+			  	<li><a class="black-text" href="{{URL::route('socsIndex')}}" >Societies</a></li>
 			  	<li><a class="dropdown-button black-text" href="#!" data-activates="dropdown1">Events<i class="material-icons right">arrow_drop_down</i></a></li>
+
 			  	@if( Auth::check( ) )
 			  		<li class="login"><a href="{{ URL::route('subscriptions') }}" class="btn waves-effect waves-light">Subscriptions</a></li>
 			  	@else 

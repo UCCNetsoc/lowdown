@@ -40,6 +40,17 @@ Route::group(['prefix' => 'events'], function()
 	Route::get('/{day}/{id}', ['as' => 'day/id', 'uses' => 'EventsController@dayViewForUser']);
 });
 
+
+Route::get('/socs', ['as' => 'socsIndex', 'uses' => 'SocietiesController@index']);
+
+Route::group(['prefix' => 'socs'], function()
+{
+	// Events
+	Route::get('/{id}', ['as' => 'soc', 'uses' => 'SocietiesController@socView']);
+	Route::get('/{id}/json', ['as' => 'soc/json', 'uses' => 'SocietiesController@socJSON']);
+	Route::get('/{id}/calendar', ['as' => 'soc/calendar', 'uses' => 'SocietiesController@calendar']);
+});
+
 Route::get('event/{id}/calendar', ['as' => 'event/id/calendar', 'uses' => 'EventsController@eventAsICS']);
 
 Route::get('calendar/{id}', ['as' => 'calendar/id', 'uses' => 'EventsController@calendar']);
