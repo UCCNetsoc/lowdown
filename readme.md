@@ -65,6 +65,8 @@ FB_SECRET=aaaabbbb11111
 
 #### Laravel Migration
 
+Before running the following commands, be sure to replace the societies in [DatabaseSeeder.php](https://github.com/UCCNetworkingSociety/lowdown/blob/master/database/seeds/DatabaseSeeder.php). (Currently working on a .csv solution to this)
+
 ```bash
 # Run database migrations (table creation)
 php artisan migrate
