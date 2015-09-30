@@ -161,7 +161,7 @@ class UserController extends Controller
         if( Auth::user()->processing == 'yes' ){
             // If the default list is still being added, show
             // a loading message
-            header("Refresh:10");
+            header("Refresh:3");
             return View::make('preparing-account');
         }
 
