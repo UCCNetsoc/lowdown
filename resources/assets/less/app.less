@@ -1,4 +1,5 @@
 @off-white: #FFFFF8;
+@off-black: @off-black;
 @red-accent: #db7c6a;
 @teal-accent: #56a7a1;
 @light-blue-accent: #519cd6;
@@ -36,7 +37,7 @@
 body{	
 	font-family: 'Roboto', sans-serif;
 
-	color: #444;
+	color: @off-black;
 
 	background: @off-white;
 
@@ -47,7 +48,7 @@ body{
 	}
 	
 	nav .button-collapse{
-		color: #333;
+		color: @off-black;
 		margin-top: 11px;
 	}
 
@@ -112,8 +113,8 @@ body{
 	hr{
 		border: 0;
 	    height: 1px;
-	    background: #333;
-	    background-image: linear-gradient(to right, @off-white, #444, @off-white);
+	    background: @off-black;
+	    background-image: linear-gradient(to right, @off-white, @off-black, @off-white);
 	}
 	
 	.events{
@@ -167,7 +168,7 @@ body{
 
 	nav ul{
 		&.side-nav li a{
-			color: #333 !important;
+			color: @off-black !important;
 		}
 
 		li {
@@ -216,7 +217,7 @@ body{
 		height: 750px;
 
 		.parallax{
-			background:black;
+			background:@off-black;
 		}
 	}
 
@@ -272,7 +273,7 @@ body{
 		margin:0;
 
 		a:link, a:visited, a:hover, a:active{
-			color:#fff;
+			color: @off-white;
 		}
 	}
 }
