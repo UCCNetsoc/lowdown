@@ -53,5 +53,3 @@ Route::group(['prefix' => 'emails'], function()
 	Route::get('/unsubscribe/{user_id}', ['as' => 'unsubscribe', 'uses' => 'EmailController@unsubscribe']);
 	Route::get('/resubscribe/{user_id}', ['as' => 'resubscribe', 'uses' => 'EmailController@resubscribe']);
 });
-
-Route::get('/emails', ['as' => 'emails', 'middleware' => 'auth', 'uses' => 'EmailController@index']);

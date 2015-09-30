@@ -26,11 +26,6 @@ class EmailController extends Controller
 |
 */
 
-	public function index( ){
-		$user = Auth::user();
-		$this->dispatch( new SendEmail($user) );
-	}
-
 	public function unsubscribe( $user_id ){
 		$id = Crypt::decrypt( $user_id );
 
