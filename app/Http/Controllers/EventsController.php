@@ -119,7 +119,7 @@ class EventsController extends Controller
 				$day = str_replace("_", " ", $day);
 				// Process string as a date but if it's malformed, return 404
 				if(  ( $time = strtotime($day) ) === false ){
-					return Redirect::to('home')->with('message', 'Oops, this page not found!');
+					abort(404);
 				}
 				break;
 		}
