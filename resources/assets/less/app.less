@@ -46,6 +46,11 @@ body{
 		margin-bottom: 30px;
 	}
 	
+	nav .button-collapse{
+		color: #333;
+		margin-top: 11px;
+	}
+
 	.off-white{
 		background: @off-white;
 	}
@@ -160,16 +165,26 @@ body{
 	}
 
 
-	nav ul li {
-		&>a {
-			color: @off-white !important;
+	nav ul{
+		&.side-nav li a{
+			color: #333 !important;
 		}
 
-		.dropdown-content li a{
-			color: #26A69A !important;
+		li {
+			&>a {
+				color: @off-white !important;
+			}
+
+			.dropdown-content li a{
+				color: #26A69A !important;
+			}
 		}
 	}
 	
+	nav .button-collapse{
+		color: white;
+		margin-top: 11px;
+	}
 
 	.welcome-page-hero{
 		height: 400px;
