@@ -30,8 +30,10 @@
 			  <a href="{{ URL::to('/home') }}" class="brand-logo">
 			  	<figure>
 					@if( Route::current()->getPath() == '/' )
+						{{-- If is the front page, use the alternate logo --}}
 						<img src="{{ App\Setting::where('name', 'logo_alt')->first()->setting }}" alt="{{ env( 'SITE_TITLE' ) }}" class="logo">
 					@else
+						{{-- Otherwise, use the normal one --}}
 						<img src="{{ App\Setting::where('name', 'logo')->first()->setting }}" alt="{{ env( 'SITE_TITLE' ) }}" class="logo">
 					@endif
 					<figcaption class="sr-only">
