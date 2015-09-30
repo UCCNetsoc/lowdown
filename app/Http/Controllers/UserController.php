@@ -193,7 +193,6 @@ class UserController extends Controller
 
         // Trim and replace all extranneous whitespace then explode the array
         $data = explode(' ', trim(preg_replace('/\s+/', ' ', $data['allSubscriptions'])));
-        
         foreach ($data as $societyID) {
             if((1 <= $societyID) && ($societyID <= Setting::where('name', 'number_of_societies')->first()->setting)){
                 try {
