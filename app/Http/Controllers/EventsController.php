@@ -139,12 +139,10 @@ class EventsController extends Controller
 	}
 
 	public function thisWeekJSON(){
-		// Look at how amazingly hacky this is like holy shit
-		$mondayStartOfWeek = strtotime("last Monday", strtotime("tomorrow"));
-		$endOfWeek = strtotime("next week", $mondayStartOfWeek);
+		$nextWeek = strtotime("+1 week");
 
-		return Event::where('time', '>', date('Y-m-d H:i:s', $mondayStartOfWeek))
-					->where('time', '<', date('Y-m-d H:i:s', $endOfWeek))
+		return Event::where( 'time', '>', date('Y-m-d H:i:s') )
+					->where( 'time', '<', date('Y-m-d H:i:s', $nextWeek) )
 					->get();
 	}
 
@@ -157,11 +155,10 @@ class EventsController extends Controller
 	}
 
 	public function thisWeek(){
-		$mondayStartOfWeek = strtotime("last Monday", strtotime("tomorrow"));
-		$endOfWeek = strtotime("next week", $mondayStartOfWeek);
+		$nextWeek = strtotime("+1 week");
 
-		$qry = Event::where('time', '>', date('Y-m-d H:i:s', $mondayStartOfWeek))
-					->where('time', '<', date('Y-m-d H:i:s', $endOfWeek));
+		$qry = Event::where( 'time', '>', date('Y-m-d H:i:s') )
+			     	->where( 'time', '<', date('Y-m-d H:i:s', $nextWeek) );
 
 		if( Auth::check() ){
 	        $soc_ids = DB::table('subscriptions')
@@ -173,7 +170,7 @@ class EventsController extends Controller
 
 		$events = $qry->orderBy('time')->get();
 
-		return view('events.day', ['day' => "This week!",
+		return view('events.day', ['day' => "The next seven days.",
 								     'events' => $events ]);
 
 	}
