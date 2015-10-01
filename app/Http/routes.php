@@ -11,20 +11,24 @@
 |
 */
 
+// Welcome page
 Route::get('/', 'UserController@index');
 
+// Basic auth controls such as password reset
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
 
+// Login and Registration
 Route::get('/register', ['as' => 'register', 'uses' => 'UserController@register']);
 Route::post('/user/store', ['as' => 'user/store', 'uses' => 'UserController@store']);
-
 Route::get('/login', ['as' => 'login', 'uses' => 'UserController@login']);
 Route::post('/user/login', ['as' => 'handleLogin', 'uses' => 'UserController@handleLogin']);
 
+// Homepage (Events listing for today)
 Route::get('/home', ['as' => 'home', 'uses' => 'EventsController@index']);
+
 
 Route::group(['prefix' => 'events'], function()
 {
@@ -40,7 +44,7 @@ Route::group(['prefix' => 'events'], function()
 	Route::get('/{day}/{id}', ['as' => 'day/id', 'uses' => 'EventsController@dayViewForUser']);
 });
 
-
+// List of all societies and links to their pages
 Route::get('/socs', ['as' => 'socsIndex', 'uses' => 'SocietiesController@index']);
 
 Route::group(['prefix' => 'socs'], function()
@@ -51,16 +55,20 @@ Route::group(['prefix' => 'socs'], function()
 	Route::get('/{id}/calendar', ['as' => 'soc/calendar', 'uses' => 'SocietiesController@calendar']);
 });
 
+// Event as .ics format
 Route::get('event/{id}/calendar', ['as' => 'event/id/calendar', 'uses' => 'EventsController@eventAsICS']);
 
+// Calendar of events as .ics format
 Route::get('calendar/{id}', ['as' => 'calendar/id', 'uses' => 'EventsController@calendar']);
 
+// A user's subscriptions
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function()
 {
 	Route::get('/subscriptions', ['as' => 'subscriptions', 'uses' => 'UserController@subscriptions']);
 	Route::post('/subscriptions/add', ['as' => 'subscriptions/add', 'uses' => 'UserController@updateSubscriptions']);
 });
 
+// Email routes for unsubscribe/resubscribe
 Route::group(['prefix' => 'emails'], function()
 {
 	Route::get('/unsubscribe/{user_id}', ['as' => 'unsubscribe', 'uses' => 'EmailController@unsubscribe']);
