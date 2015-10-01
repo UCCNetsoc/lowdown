@@ -28,11 +28,17 @@ class Subscription extends Model
      */
     protected $hidden = [];
 
+    /**
+     * Get the society from a subscription
+     */
     public function societies()
     {
         return $this->belongsTo('App\Society');
     }
 
+    /**
+     * Get the user from a subscription
+     */
     public function user(){
     	return $this->belongsTo('App\User');
     }

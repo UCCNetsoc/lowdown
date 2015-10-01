@@ -28,6 +28,9 @@ class Society extends Model
      */
     protected $hidden = [];
 
+    /**
+     * Get the events for a society
+     */
     public function events()
     {
         return $this->hasMany('App\Event');
