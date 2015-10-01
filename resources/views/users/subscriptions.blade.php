@@ -26,13 +26,13 @@
 							checked="checked"
 						@endif
 
-						onchange="addToList( {{ $society->id }} )"
+						onchange="updateList()"
 					/>
 					<label for="{{ $society->id }}">{{ $society->name }} Society</label>
 				</p>
 			@endforeach
 		
-		<input type="hidden" name="allSubscriptions" value=""/>
+		<input type="hidden" name="allSubscriptions" value="[]"/>
 		<div class="row">
 			<button class="btn waves-effect waves-light" type="submit" name="action" id="update-subscription">Update Subscription
 				<i class="mdi-content-send right"></i>
