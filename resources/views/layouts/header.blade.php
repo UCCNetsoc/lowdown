@@ -97,6 +97,32 @@
 					<li class="login"><a class="waves-effect waves-light modal-trigger black-text" href="#login-modal">Login</a></li>
 					<li><a href="{{ URL::route('register') }}" class="black-text">Register</a></li>
 			  	@endif
+			  	<li><a href="{{URL::route('socsIndex')}}" >Societies</a></li>
+		  		<li>
+		  			<a href="{{ URL::route('day', ['day' => 'monday']) }}">
+		  				Monday
+		  			</a>
+		  		</li>
+		  		<li>
+		  			<a href="{{ URL::route('day', ['day' => 'tuesday']) }}">
+		  				Tuesday
+		  			</a>
+		  		</li>
+		  		<li>
+		  			<a href="{{ URL::route('day', ['day' => 'wednesday']) }}">
+		  				Wednesday
+		  			</a>
+		  		</li>
+		  		<li>
+		  			<a href="{{ URL::route('day', ['day' => 'thursday']) }}">
+		  				Thursday
+		  			</a>
+		  		</li>
+		  		<li>
+		  			<a href="{{ URL::route('day', ['day' => 'friday']) }}">
+		  				Friday
+		  			</a>
+		  		</li>
 			 
 			  </ul>
 			</div>
