@@ -192,25 +192,23 @@ class UserController extends Controller
      */
     public function updateSubscriptions( ){
         $data = Request::only(['allSubscriptions']);
+        $user_id = Auth::user()->id;
 
-        // Trim and replace all extranneous whitespace then explode the array
-        $data = explode(' ', trim(preg_replace('/\s+/', ' ', $data['allSubscriptions'])));
+        $chosen_societies = json_decode($data['allSubscriptions']);
 
-        foreach ($data as $societyID) {
-            if((1 <= $societyID) && ($societyID <= Setting::where('name', 'number_of_societies')->first()->setting)){
-                try {
-                    // If subscription exists, cancel it
-                    $currentSubscription = Subscription::where('user_id', Auth::user()->id)
-                                                       ->where('society_id', $societyID)
-                                                       ->firstOrFail();
-                    $currentSubscription->delete(); 
-                } catch (ModelNotFoundException $e) {
-                    // If subscription doesn't exist, create one
-                    Subscription::create(['society_id' => $societyID, 'user_id' => Auth::user()->id]);
-                }    
-            }        
+        $toDelete = Subscription::where('user_id', $user_id)
+                                ->whereNotIn('society_id', $chosen_societies)
+                                ->get();
+
+        foreach($toDelete as $subscription){
+            $subscription->delete();
         }
-        
+
+        foreach($chosen_societies as $society_id){
+            Subscription::firstOrCreate(['society_id' => $society_id,
+                                         'user_id' => $user_id]);
+        }
+
         return Redirect::route('subscriptions');
     }
 }
