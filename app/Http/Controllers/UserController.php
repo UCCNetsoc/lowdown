@@ -44,7 +44,7 @@ class UserController extends Controller
 	
 	/**
 	 * Render registration view
-	 * @return VIEW register
+	 * @return VIEW users.register
 	 */
     public function register( ){
         return View::make( 'users.register' );
@@ -53,7 +53,7 @@ class UserController extends Controller
     /**
      * Creates a new user
      * 	Data should be POSTed to this function only
-     * @return REDIRECT home
+     * @return REDIRECT subscriptions
      */
     public function store( ){
     	// Only allow following fields to be submitted
@@ -107,7 +107,7 @@ class UserController extends Controller
 
     /**
      * Render login view
-     * @return VIEW login
+     * @return VIEW users.login
      */
     public function login( ){
 
@@ -194,17 +194,23 @@ class UserController extends Controller
         $data = Request::only(['allSubscriptions']);
         $user_id = Auth::user()->id;
 
+        // An array of all the ticked checkboxes
         $chosen_societies = json_decode($data['allSubscriptions']);
 
+        // Get all subscriptions that WERE NOT ticked
         $toDelete = Subscription::where('user_id', $user_id)
                                 ->whereNotIn('society_id', $chosen_societies)
                                 ->get();
 
         foreach($toDelete as $subscription){
+            // Delete the subscriptions that weren't ticked
             $subscription->delete();
         }
 
         foreach($chosen_societies as $society_id){
+            // For every TICKED subscription
+            //     If exists: Do nothing
+            //     Else: create subscription
             Subscription::firstOrCreate(['society_id' => $society_id,
                                          'user_id' => $user_id]);
         }
