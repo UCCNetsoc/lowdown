@@ -55,7 +55,7 @@ class EventsController extends Controller
 
 		$events = $values['events']->get();
 
-		return view('events.day', ['day' => $values['day'],
+		return View::make('events.day', ['day' => $values['day'],
 								  'events' => $events]);
 	}
 
@@ -90,7 +90,7 @@ class EventsController extends Controller
 
         $events = $values['events']->whereIn('society_id', $soc_ids)->get();
 
-		return view('events.day', ['day' => $values['day'],
+		return View::make('events.day', ['day' => $values['day'],
 								     'events' => $events ]);
 
 	}
@@ -170,7 +170,7 @@ class EventsController extends Controller
 
 		$events = $qry->orderBy('time')->get();
 
-		return view('events.day', ['day' => "The next seven days.",
+		return View::make('events.day', ['day' => "The next seven days.",
 								     'events' => $events ]);
 
 	}
