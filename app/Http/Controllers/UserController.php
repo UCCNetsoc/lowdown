@@ -167,7 +167,7 @@ class UserController extends Controller
             return View::make('preparing-account');
         }
 
-        $societies = Society::orderBy('name')->get();
+        $societies = Society::all();
         $subscriptions = User::find( Auth::user()->id )->subscriptions( );
         $subscriptions = $subscriptions->get();
 
@@ -175,6 +175,8 @@ class UserController extends Controller
             // For every subscription a user HAS, mark it as checked
             $societies[$subscription->society_id - 1]->checked = "checked";
         }
+
+        $societies = $societies->sortBy('name');
 
         // Get total number of societies
         $numberOfSocieties = Setting::where('name', 'number_of_societies')->first()->setting;
