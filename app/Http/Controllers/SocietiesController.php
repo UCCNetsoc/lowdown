@@ -38,7 +38,7 @@ class SocietiesController extends Controller
 	public function socView( $society_identifier ){
 		$values = $this->eventsForSociety($society_identifier);
 
-		return view('societies.events', ['society_name' => $values['society']->name . ' Society',
+		return View::make('societies.events', ['society_name' => $values['society']->name . ' Society',
 										 'society_ref' =>  $values['society']->facebook_ref,
 										  'events' => $values['events']]);
 	}
