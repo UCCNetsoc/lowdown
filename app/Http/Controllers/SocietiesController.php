@@ -29,12 +29,22 @@ class SocietiesController extends Controller
 | 
 |
 */
-
+	/**
+	 * Lists all the societies
+	 * @return VIEW societies.index
+	 */
     public function index( ){
         return View::make( 'societies.index' );
     }
 
-
+    /**
+     * Presents a view of all of a societies upcoming events
+     * 
+     * @param  string $society_identifier  This is the vanity URL of 
+     *                                     the society's FB page
+     *                                     
+     * @return VIEW societies.events
+     */
 	public function socView( $society_identifier ){
 		$values = $this->eventsForSociety($society_identifier);
 
@@ -54,8 +64,11 @@ class SocietiesController extends Controller
 
 	/**
 	 * Gets the events for a society
-	 * @param  [type] $day [description]
-	 * @return [type]      [description]
+	 * 
+     * @param  string $society_identifier  This is the vanity URL of 
+     *                                     the society's FB page
+     *                                     
+     * @return Array Array containing Society object and their events
 	 */
 	public function eventsForSociety($society_identifier){
 		$society_identifier = str_replace("-", " ", $society_identifier);
@@ -77,6 +90,14 @@ class SocietiesController extends Controller
 
 	}
 
+	/**
+	 * Present .ics/iCal content for all of a society's events
+	 * 
+	 * @param  string $society_id This is the vanity URL of 
+     *                            the society's FB page
+     *                            
+	 * @return .ics file content
+	 */
 	public function calendar( $society_id ){
         $events = $this->eventsForSociety($society_id)['events'];
 
@@ -87,6 +108,8 @@ class SocietiesController extends Controller
 
 			$eventTime = new DateTime($event->time);
 			$endTime = $eventTime;
+
+			// ISO 8601 time interval format for ONE HOUR
 			$endTime->add(new DateInterval('PT1H'));
 
 			$eventSummary = $event->society()->first()->name . ' Society: '
