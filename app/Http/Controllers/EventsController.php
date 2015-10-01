@@ -40,6 +40,12 @@ class EventsController extends Controller
 		return $this->dayView( 'today' );
 	}
 
+	/**
+	 * Presents a list of events from all societies for
+	 * a given day
+	 * @param  string $day
+	 * @return VIEW events.day
+	 */
 	public function dayView( $day ){
 		if( Auth::check() ){
 			// The Crypt call here is a bit cheat-y but fuck it, I want this view
@@ -138,6 +144,10 @@ class EventsController extends Controller
 
 	}
 
+	/**
+	 * A list of events from this week to be converted to JSON
+	 * @return Event Events for this coming week
+	 */
 	public function thisWeekJSON(){
 		$nextWeek = strtotime("+1 week");
 
@@ -146,14 +156,22 @@ class EventsController extends Controller
 					->get();
 	}
 
+	/**
+	 * Dispatches a job to update the events list
+	 *
+	 * Used for initially kicking off the "UpdateEvent" job
+	 * and is only used in bootstrapping the application
+	 */
 	public function update(){
-		//Dispatches a job to update the events list.
-
 		$this->dispatch(new UpdateEvents());
 		echo "dispatched";
 		die();
 	}
 
+	/**
+	 * Presents a view of the coming week's events
+	 * @return View events.day
+	 */
 	public function thisWeek(){
 		$nextWeek = strtotime("+1 week");
 
@@ -161,6 +179,8 @@ class EventsController extends Controller
 			     	->where( 'time', '<', date('Y-m-d H:i:s', $nextWeek) );
 
 		if( Auth::check() ){
+			// If the user's logged in, take their subscriptions
+			// into account
 	        $soc_ids = DB::table('subscriptions')
 			 ->where('user_id', Auth::user()->id)
 			 ->lists('society_id');
@@ -175,6 +195,11 @@ class EventsController extends Controller
 
 	}
 
+	/**
+	 * Converts the an event's details into .ics
+	 * @param  int $event_id
+	 * @return .ics formatted content
+	 */
 	public function eventAsICS( $event_id ){
 		$vCalendar = new \Eluceo\iCal\Component\Calendar('lowdown.netsoc.co');
 
@@ -188,6 +213,8 @@ class EventsController extends Controller
 
 		$eventTime = new DateTime($event->time);
 		$endTime = $eventTime;
+
+		// ISO 8601 time interval format for ONE HOUR
 		$endTime->add(new DateInterval('PT1H'));
 
 		$eventSummary = $event->society()->first()->name . ' Society: '
@@ -199,6 +226,7 @@ class EventsController extends Controller
 		    ->setSummary($eventSummary);
 
 		if($event->location){
+			// If event has a location set
 			$vEvent->setLocation($event->location);
 		}
 
@@ -210,6 +238,11 @@ class EventsController extends Controller
 		echo $vCalendar->render();
 	}
 
+	/**
+	 * Present a full .ics calendar of events for a user
+	 * @param  integer $user_id
+	 * @return .ics formatted content
+	 */
 	public function calendar( $user_id ){
 		$user_id = Crypt::decrypt($user_id);
 
@@ -227,6 +260,8 @@ class EventsController extends Controller
 
 			$eventTime = new DateTime($event->time);
 			$endTime = $eventTime;
+
+			// ISO 8601 time interval format for ONE HOUR
 			$endTime->add(new DateInterval('PT1H'));
 
 			$eventSummary = $event->society()->first()->name . ' Society: '
@@ -238,6 +273,7 @@ class EventsController extends Controller
 			    ->setSummary($eventSummary);
 
 			if($event->location){
+				// If event has a location set
 				$vEvent->setLocation($event->location);
 			}
 
