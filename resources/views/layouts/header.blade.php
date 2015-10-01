@@ -30,7 +30,7 @@
     <header>
     	<nav>
 			<div class="nav-wrapper container">
-			  <a href="{{ URL::to('/home') }}" class="brand-logo">
+			  <a href="{{ URL::route('home') }}" class="brand-logo">
 			  	<figure>
 					@if( Route::current() && Route::current()->getPath() == '/' )
 						{{-- If is the front page, use the alternate logo --}}
