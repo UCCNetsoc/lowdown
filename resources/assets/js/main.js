@@ -36,7 +36,7 @@ $( document ).ready(function($){
 			
 			link = link.replace("https://", "webcal://");
 
-			if(ua.indexOf("android") == -1 && ( navigator.platform.toUpperCase().indexOf('LINUX')>=0 || navigator.platform.toUpperCase().indexOf('WIN')>=0 ) ){
+			if(navigator.userAgent.indexOf("android") == -1 && ( navigator.platform.toUpperCase().indexOf('LINUX')>=0 || navigator.platform.toUpperCase().indexOf('WIN')>=0 ) ){
 				link = "https://www.google.com/calendar/render?cid=" + link;
 			}
 
