@@ -24,9 +24,9 @@ class EmailController extends Controller
 		$user->unsubscribed_email = "yes";
 		$user->save();
 
-		return Redirect::to('/user/subscriptions');
+		return Redirect::route('subscriptions');
 	}
-
+	
 	public function resubscribe( $user_id ){
 		$id = Crypt::decrypt( $user_id );
 
@@ -34,7 +34,7 @@ class EmailController extends Controller
 		$user->unsubscribed_email = "no";
 		$user->save();
 
-		return Redirect::to('/user/subscriptions');
+		return Redirect::route('subscriptions');
 	}
 
 }
