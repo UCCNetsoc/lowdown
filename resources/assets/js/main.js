@@ -32,11 +32,9 @@ $( document ).ready(function($){
     	$(".calendar-button").each(function(){
 	    	var link = $(this).attr('href');
 
-			link = link.replace("http://", "webcal://");
+			var link = link.replace(window.location.protocol + "//", "webcal://");
 			
-			link = link.replace("https://", "webcal://");
-
-			if(navigator.userAgent.toLowerCase().indexOf("android") == -1 && ( navigator.platform.toUpperCase().indexOf('LINUX')>=0 || navigator.platform.toUpperCase().indexOf('WIN')>=0 ) ){
+			if(navigator.platform.toUpperCase().indexOf('LINUX')>=0 || navigator.platform.toUpperCase().indexOf('WIN')>=0){
 				link = "https://www.google.com/calendar/render?cid=" + link;
 			}
 
