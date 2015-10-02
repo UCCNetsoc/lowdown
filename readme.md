@@ -72,6 +72,10 @@ DEV_EMAIL=netsoc@uccsocieties.ie
 
 # Title of the project
 SITE_TITLE=Lowdown
+
+# URL For your issue tracker
+ISSUE_TRACKER=https://github.com/UCCNetworkingSociety/lowdown/issues
+
 BASE_URL=http://lowdown.dev
 
 # The ID and Secret of a facebook app you created to access the API
