@@ -39,7 +39,7 @@ class UpdateEvents extends Job implements SelfHandling, ShouldQueue
     {
       if( $this->isSeeding ){
         $toTake = 200; // 200 societies
-        $delay = 0; // Immediately
+        $delay = 0; // Of no concern as we never dispatch the job
       } else{
         $toTake = 20; // 20 societies
         $delay = 600; // 10 Minutes
@@ -68,6 +68,14 @@ class UpdateEvents extends Job implements SelfHandling, ShouldQueue
                                 ->get(); // Get Societies to query
 
         foreach($societies as $society){
+            // Make a request to the facebook API to get:
+            //    name
+            //    start time
+            //    location
+            //    description
+            //    cover photo
+            //    
+            // of all the events in the future for the given society
             $request = new FacebookRequest($session, 'GET', '/' . $society->facebook_ref . '/events' .
                                            '?since='.time().'&fields=name,start_time,location,description,cover');
 
@@ -81,6 +89,8 @@ class UpdateEvents extends Job implements SelfHandling, ShouldQueue
             $events = $graphObject->asArray();
 
             if( array_key_exists('data', $events) ){
+                // Making sure we have data before we start processing it
+                
                 $events = $events['data'];
 
                 foreach($events as $fbEvent){
@@ -90,26 +100,33 @@ class UpdateEvents extends Job implements SelfHandling, ShouldQueue
                     $storedEvent->society_id = $society->id;
                     $storedEvent->title = $fbEvent->name;
                     $storedEvent->time = $fbEvent->start_time;
+
                     if(array_key_exists("description", $fbEvent) ){
+                        // If the event has a description, truncate it to a
+                        // max of 500 characters
                         $description = substr($fbEvent->description, 0, 500);
                         if( strlen($description) < strlen($fbEvent->description) ){
                             $description .= "…";
                         }
                         $storedEvent->description = $description;
                     }
+
                     if(array_key_exists("location", $fbEvent) ){
                         $storedEvent->location = $fbEvent->location;
                     }
+
                     if(array_key_exists("cover", $fbEvent)){
                         $storedEvent->image = $fbEvent->cover->source;
                     }
+
+                    // save the event in the database
                     $storedEvent->save();
                 }
             }
         }
 
         if( count($societies) < $toTake ){
-             $store->setting = 0;
+            $store->setting = 0;
         } else {
             $store->setting += $toTake;
         }
@@ -119,6 +136,8 @@ class UpdateEvents extends Job implements SelfHandling, ShouldQueue
         $job = (new \App\Jobs\UpdateEvents())->delay($delay);
 
         if( !$this->isSeeding ){
+          // We'll recursively dispatch jobs with a delay so
+          // the queue can handle everything for us
           $this->dispatch($job);
         }
 
