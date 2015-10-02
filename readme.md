@@ -76,6 +76,8 @@ SITE_TITLE=Lowdown
 # URL For your issue tracker
 ISSUE_TRACKER=https://github.com/UCCNetworkingSociety/lowdown/issues
 
+# Domain/subdomain name (EG: lowdown.netsoc.co)
+DOMAIN_NAME=lowdown.netsoc.co
 BASE_URL=http://lowdown.dev
 
 # The ID and Secret of a facebook app you created to access the API

@@ -101,7 +101,7 @@ class SocietiesController extends Controller
 	public function calendar( $society_id ){
         $events = $this->eventsForSociety($society_id)['events'];
 
-		$vCalendar = new \Eluceo\iCal\Component\Calendar('lowdown.netsoc.co');
+		$vCalendar = new \Eluceo\iCal\Component\Calendar( env('DOMAIN_NAME') );
 
 		foreach($events as $event){
 			$vEvent = new \Eluceo\iCal\Component\Event();

@@ -59,7 +59,7 @@ class SendEmail extends Job implements SelfHandling, ShouldQueue
                     ];
 
             Mail::send('emails.weekly', $data, function ($message) {
-                $message->from('lowdown@netsoc.co', 'Lowdown');
+                $message->from( env('MAIL_ADDRESS'), 'Lowdown');
                 $message->subject('Your Weekly Society Lowdown');
                 $message->to($this->user->email);
             });

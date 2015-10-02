@@ -201,7 +201,7 @@ class EventsController extends Controller
 	 * @return .ics formatted content
 	 */
 	public function eventAsICS( $event_id ){
-		$vCalendar = new \Eluceo\iCal\Component\Calendar('lowdown.netsoc.co');
+		$vCalendar = new \Eluceo\iCal\Component\Calendar( env('DOMAIN_NAME') );
 
 		try{
 			$event = Event::findOrFail($event_id);
@@ -253,7 +253,7 @@ class EventsController extends Controller
         $events = Event::where('time', '>', date('Y-m-d H:i:s'))
         	           ->whereIn('society_id', $soc_ids)->get();
 
-		$vCalendar = new \Eluceo\iCal\Component\Calendar('lowdown.netsoc.co');
+		$vCalendar = new \Eluceo\iCal\Component\Calendar( env('DOMAIN_NAME') );
 
 		foreach($events as $event){
 			$vEvent = new \Eluceo\iCal\Component\Event();
