@@ -2,7 +2,7 @@ Lowdown
 ===
 A weekly lowdown of all UCC Society events based on facebook events from the societies.
 
-![](http://images.netsoc.co/lowdown-logo.jpg)
+[![](http://images.netsoc.co/lowdown-logo.jpg)](http://lowdown.netsoc.co)
 
 ## Requirements
 * Apache
