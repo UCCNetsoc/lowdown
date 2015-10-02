@@ -81,8 +81,9 @@ class SettingsSeeder extends Seeder {
     {
         DB::table('settings')->delete();
 
+        $total_num_societies = DB::table('societies')->select( DB::raw('COUNT(id) AS society_count') )->first();
         // Total number of societies
-        Setting::create(['name' => 'number_of_societies', 'setting' => '103']);
+        Setting::create(['name' => 'number_of_societies', 'setting' => $total_num_societies->society_count]);
 
         // The next society to process
         Setting::create(['name' => 'next_society', 'setting' => '0']);
