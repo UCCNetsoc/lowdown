@@ -90,7 +90,7 @@ BUGSNAG_API_KEY=aaaabbbb11111
 
 #### Laravel Migration
 
-Before running the following commands, be sure to change the list of societies in (lost_of_societies.csv)[https://github.com/UCCNetworkingSociety/lowdown/blob/master/list_of_societies.csv]. They're done in the form:
+Before running the following commands, be sure to change the list of societies in [lost_of_societies.csv](https://github.com/UCCNetworkingSociety/lowdown/blob/master/list_of_societies.csv). They're done in the form:
 
 ```
 Society Name,facebook_reference
