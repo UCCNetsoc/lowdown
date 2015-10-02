@@ -45,6 +45,9 @@ CACHE_DRIVER=file
 SESSION_DRIVER=file
 QUEUE_DRIVER=database
 
+# Enables the route "/events/update" to kick off the queue for pulling in events
+ENABLE_UPDATE_QUEUE_KICKOFF=true
+
 MAIL_DRIVER=smtp
 MAIL_HOST=smtp.sendgrid.net
 MAIL_PORT=587
