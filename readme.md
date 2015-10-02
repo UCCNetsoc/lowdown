@@ -31,11 +31,19 @@ composer update
 Place a .env file in the root of your application using the following as a template.
 
 ```bash
+# APP_ENV={local|production|testing}
 APP_ENV=production
+
+# Enable debug messages?
 APP_DEBUG=false
+
+# Unique app_key (mash the keyboard for a while)
 APP_KEY={32$9;`GTky*=A"qw&v+-pe,?rGz$+/E
+
+# Required by laravel, effectively the same as BASE_URL
 APP_URL=http://localhost
 
+# Database details
 DB_HOST=localhost
 DB_DATABASE=lowdown
 DB_USERNAME=root
@@ -48,6 +56,7 @@ QUEUE_DRIVER=database
 # Enables the route "/events/update" to kick off the queue for pulling in events
 ENABLE_UPDATE_QUEUE_KICKOFF=true
 
+# Mail settings
 MAIL_DRIVER=smtp
 MAIL_HOST=smtp.sendgrid.net
 MAIL_PORT=587
@@ -58,13 +67,18 @@ MAIL_KEY=aaaabbbb11111
 MAIL_ADDRESS=lowdown@netsoc.co
 MAIL_NAME=Lowdown
 
+# Developer Email
 DEV_EMAIL=netsoc@uccsocieties.ie
+
+# Title of the project
 SITE_TITLE=Lowdown
 BASE_URL=http://lowdown.dev
 
+# The ID and Secret of a facebook app you created to access the API
 FB_ID=123456789
 FB_SECRET=aaaabbbb11111
 
+# Used if you want to use BugSnag to track bugs
 BUGSNAG_API_KEY=aaaabbbb11111
 ```
 
