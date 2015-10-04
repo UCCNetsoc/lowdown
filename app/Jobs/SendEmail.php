@@ -39,7 +39,7 @@ class SendEmail extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        if( $this->user->unsubscribed_email != "no"){
+        if( $this->user->unsubscribed_email == "no"){
           $soc_ids = DB::table('subscriptions')->where('user_id', $this->user->id)->lists('society_id');
 
           // All Events, in user subscribed society, next week. 
