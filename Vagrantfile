@@ -8,6 +8,8 @@ ip_address = "172.22.22.25"
 Vagrant.configure(2) do |config|
   
   config.vm.box = "Netsoc"
+  config.vm.box_url = "https://netsoc.co/netsoc_boxes.json"
+  config.vm.box_check_update = true
 
   # Configuration for our virtualisation provider
   config.vm.provider "VirtualBox" do |vb|
@@ -27,21 +29,22 @@ Vagrant.configure(2) do |config|
   #   The sync will persist as you edit files, you won't have
   #   to destroy and re-up the VM each time you make a change
   #   
-  config.vm.synced_folder "./", "/var/www/html", :owner=> 'www-data', :group=>'www-data'
+  config.vm.synced_folder "./", "/var/www", :owner=> 'www-data', :group=>'www-data'
+  config.vm.synced_folder "./public", "/var/www/html", :owner=> 'www-data', :group=>'www-data'
 
   config.vm.provision "shell", inline: <<-SHELL
     # Create our database and give root all permissions
-    mysql -uroot -proot -e "CREATE DATABASE IF NOT EXISTS lowdown;"
+    mysql -uroot -proot -e "CREATE DATABASE IF NOT EXISTS #{project_name};"
     mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root';"
     sudo service mysql restart
-  
-    # Set up swap space so composer doesn't run out of memory
+    
+    #Create swap space for composer's operations
     sudo /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
     sudo /sbin/mkswap /var/swap.1
     sudo /sbin/swapon /var/swap.1
-    
+
     # Update laravel and create all the DB tables
-    cd /var/www/html/
+    cd /var/www/
     sudo composer update
     sudo php artisan migrate
     sudo php artisan db:seed
