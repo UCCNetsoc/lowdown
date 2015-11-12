@@ -23,7 +23,7 @@ elixir(function(mix) {
 	    'public/**/*',
 	    'resources/views/**/*'
 		], {
-		proxy: 'lowdown.dev/public',
+		proxy: 'lowdown.dev',
 		reloadDelay: 500
 	});
 });
