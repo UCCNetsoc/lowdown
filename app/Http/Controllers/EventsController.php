@@ -101,12 +101,28 @@ class EventsController extends Controller
 
 	}
 
+	public static function getDayEventsForUser( $day, $user_id ){
+		$values = EventsController::eventsForDay($day);
+
+		if(! is_array($values)){
+			return $values;
+		}
+
+        $soc_ids = DB::table('subscriptions')
+        			 ->where('user_id', $user_id)
+        			 ->lists('society_id');
+
+        $events = $values['events']->whereIn('society_id', $soc_ids)->get();
+
+        return $events;
+	}
+
 	/**
 	 * Gets the events for a specific day
 	 * @param  [type] $day [description]
 	 * @return [type]      [description]
 	 */
-	public function eventsForDay($day){
+	public static function eventsForDay($day){
 		$day = strtolower($day);
 		$time = time();
 
@@ -143,6 +159,8 @@ class EventsController extends Controller
 		return ['day' => $day, 'events' => $events];
 
 	}
+
+
 
 	/**
 	 * A list of events from this week to be converted to JSON

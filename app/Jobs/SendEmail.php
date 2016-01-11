@@ -11,6 +11,7 @@ use App\User;
 use App\Event;
 use DB;
 use Mail;
+use App\Http\Controllers\EventsController;
 
 class SendEmail extends Job implements SelfHandling, ShouldQueue
 {
@@ -58,9 +59,17 @@ class SendEmail extends Job implements SelfHandling, ShouldQueue
                         'random_event' => $random_event
                     ];
 
+            $data['emailEvents'] = [
+              'monday' => EventsController::getDayEventsForUser( 'monday', $this->user->id)->chunk(2),
+              'tuesday' => EventsController::getDayEventsForUser( 'tuesday', $this->user->id)->chunk(2),
+              'wednesday' => EventsController::getDayEventsForUser( 'wednesday', $this->user->id)->chunk(2),
+              'thursday' => EventsController::getDayEventsForUser( 'thursday', $this->user->id)->chunk(2),
+              'friday' => EventsController::getDayEventsForUser( 'friday', $this->user->id)->chunk(2),
+            ];
+
             Mail::send('emails.weekly', $data, function ($message) {
                 $message->from( env('MAIL_ADDRESS'), 'Lowdown');
-                $message->subject('Your Weekly Society Lowdown');
+                $message->subject('Your Weekly Society Lowdown ('.date('l d M').')');
                 $message->to($this->user->email);
             });
           }
