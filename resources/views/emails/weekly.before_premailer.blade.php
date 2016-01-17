@@ -216,54 +216,20 @@
 </head>
 
 <body bgcolor="#f7f7f7">
+<small style="color: #FFFFFF;"><?php echo $quote->title.' | '.$quote->subtitle; ?></small>
 <table align="center" cellpadding="0" cellspacing="0" class="container-for-gmail-android" width="100%">
-  <tr>
-    <td align="left" valign="top" width="100%" style="background:repeat-x url(http://s3.amazonaws.com/swu-filepicker/4E687TRe69Ld95IDWyEg_bg_top_02.jpg) #ffffff;">
-      <center>
-      <img src="http://s3.amazonaws.com/swu-filepicker/SBb2fQPrQ5ezxmqUTgCr_transparent.png" class="force-width-gmail">
-        <table cellspacing="0" cellpadding="0" width="100%" bgcolor="#ffffff" background="http://s3.amazonaws.com/swu-filepicker/4E687TRe69Ld95IDWyEg_bg_top_02.jpg" style="background-color:transparent">
-          <tr>
-            <td width="100%" height="80" valign="top" style="text-align: center; vertical-align:middle;">
-            <!--[if gte mso 9]>
-            <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="mso-width-percent:1000;height:80px; v-text-anchor:middle;">
-              <v:fill type="tile" src="http://s3.amazonaws.com/swu-filepicker/4E687TRe69Ld95IDWyEg_bg_top_02.jpg" color="#ffffff" />
-              <v:textbox inset="0,0,0,0">
-            <![endif]-->
-              <center>
-                <table cellpadding="0" cellspacing="0" width="600" class="w320">
-                  <tr>
-                    <td class="pull-left mobile-header-padding-left" style="vertical-align: middle;">
-                      <!-- <a href=""><img width="200" height="44" src="<?php //echo $message->embed(URL::to('/').'/images/email_logo.png'); ?>" alt="logo"></a> -->
-                      <a href=""><img width="200" height="44" src="<?php echo $message->embed(URL::to('/').'/images/email_logo.png'); ?>" alt="logo"></a>
-                    </td>
-                    <td class="pull-right mobile-header-padding-right" style="color: #4d4d4d;">
-                      
-                    </td>
-                  </tr>
-                </table>
-              </center>
-              <!--[if gte mso 9]>
-              </v:textbox>
-            </v:rect>
-            <![endif]-->
-            </td>
-          </tr>
-        </table>
-      </center>
-    </td>
-  </tr>
   <tr>
     <td align="center" valign="top" width="100%" style="background-color: #f7f7f7;" class="content-padding">
       <center>
         <table cellspacing="0" cellpadding="0" width="600" class="w320">
           <tr>
             <td class="header-lg">
-              Your weekly Lowdown has arrived!
+              <?php echo $quote->title; ?>
             </td>
           </tr>
           <tr>
             <td class="free-text">
-              This is some other text I'll sort out later.
+              <?php echo $quote->subtitle; ?>
             </td>
           </tr>
           <tr>
@@ -283,6 +249,11 @@
   </tr>
 
 <?php foreach( $emailEvents as $name => $day ){ ?>
+
+<?php 
+  $this_day = $this_week->add( date_interval_create_from_date_string('1 day') );
+  $url = URL::route('day/id', ['day' => $this_day->format('Y-m-d'), 'id' => Crypt::encrypt($user->id)]); 
+?>
   <tr>
     <td align="center" valign="top" width="100%" style="background-color: #ffffff;  border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5;">
       <center>
@@ -292,7 +263,7 @@
               <table cellpadding="0" cellspacing="0" width="100%">
                 <tr>
                   <td class="header-md">
-                    <?php echo ucfirst($name); ?>
+                    <a style="color: #FF6F6F;" href="<?php echo $url; ?>"><?php echo ucfirst($name); ?> <br /><small style="font-size: 11px;">View All &rarr;</small></a>
                   </td>
                 </tr>
               </table>

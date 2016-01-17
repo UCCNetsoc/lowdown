@@ -216,42 +216,8 @@
 </head>
 
 <body bgcolor="#f7f7f7" style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;-webkit-font-smoothing: antialiased;-webkit-text-size-adjust: none;height: 100%;color: #676767;width: 100% !important;margin: 0 !important;">
+<small style="color: #FFFFFF;font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;"><?php echo $quote->title.' | '.$quote->subtitle; ?></small>
 <table align="center" cellpadding="0" cellspacing="0" class="container-for-gmail-android" width="100%" style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;min-width: 600px;border-collapse: collapse !important;">
-  <tr style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">
-    <td align="left" valign="top" width="100%" style="background: repeat-x url(http://s3.amazonaws.com/swu-filepicker/4E687TRe69Ld95IDWyEg_bg_top_02.jpg) #ffffff;font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;font-size: 14px;color: #777777;text-align: center;line-height: 21px;border-collapse: collapse;">
-      <center style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">
-      <img src="http://s3.amazonaws.com/swu-filepicker/SBb2fQPrQ5ezxmqUTgCr_transparent.png" class="force-width-gmail" style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;max-width: 600px;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;min-width: 600px;height: 0px !important;line-height: 1px !important;font-size: 1px !important;">
-        <table cellspacing="0" cellpadding="0" width="100%" bgcolor="#ffffff" background="http://s3.amazonaws.com/swu-filepicker/4E687TRe69Ld95IDWyEg_bg_top_02.jpg" style="background-color: transparent;font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;border-collapse: collapse !important;">
-          <tr style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">
-            <td width="100%" height="80" valign="top" style="text-align: center;vertical-align: middle;font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;font-size: 14px;color: #777777;line-height: 21px;border-collapse: collapse;">
-            <!--[if gte mso 9]>
-            <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="mso-width-percent:1000;height:80px; v-text-anchor:middle;">
-              <v:fill type="tile" src="http://s3.amazonaws.com/swu-filepicker/4E687TRe69Ld95IDWyEg_bg_top_02.jpg" color="#ffffff" />
-              <v:textbox inset="0,0,0,0">
-            <![endif]-->
-              <center style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">
-                <table cellpadding="0" cellspacing="0" width="600" class="w320" style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;border-collapse: collapse !important;">
-                  <tr style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">
-                    <td class="pull-left mobile-header-padding-left" style="vertical-align: middle;font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;font-size: 14px;color: #777777;text-align: left;line-height: 21px;border-collapse: collapse;width: 290px;padding-left: 10px;">
-                      <!-- <a href=""><img width="200" height="44" src="<?php //echo $message->embed(URL::to('/').'/images/email_logo.png'); ?>" alt="logo"></a> -->
-                      <a href="" style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;color: #676767;text-decoration: none !important;"><img width="200" height="44" src="<?php echo $message->embed(URL::to('/').'/images/email_logo.png'); ?>" alt="logo" style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;max-width: 600px;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;border: none;"></a>
-                    </td>
-                    <td class="pull-right mobile-header-padding-right" style="color: #4d4d4d;font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;font-size: 14px;text-align: right;line-height: 21px;border-collapse: collapse;width: 290px;padding-left: 10px;">
-                      
-                    </td>
-                  </tr>
-                </table>
-              </center>
-              <!--[if gte mso 9]>
-              </v:textbox>
-            </v:rect>
-            <![endif]-->
-            </td>
-          </tr>
-        </table>
-      </center>
-    </td>
-  </tr>
   <tr style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">
     <td align="center" valign="top" width="100%" style="background-color: #f7f7f7;font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;font-size: 14px;color: #777777;text-align: center;line-height: 21px;border-collapse: collapse;padding: 20px 0 30px;" class="content-padding">
       <center style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">
@@ -280,8 +246,13 @@
       </center>
     </td>
   </tr>
-
+<?php $this_week = new DateTime( date('Y-m-d\TH:i:sP', strtotime( 'this sunday' ) ) ); ?>
 <?php foreach( $emailEvents as $name => $day ){ ?>
+
+<?php 
+  $this_day = $this_week->add( date_interval_create_from_date_string('1 day') );
+  $url = URL::route('day/id', ['day' => $this_day->format('Y-m-d'), 'id' => Crypt::encrypt($user->id)]); 
+?>
   <tr style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">
     <td align="center" valign="top" width="100%" style="background-color: #ffffff;border-top: 1px solid #e5e5e5;border-bottom: 1px solid #e5e5e5;font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;font-size: 14px;color: #777777;text-align: center;line-height: 21px;border-collapse: collapse;">
       <center style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">
@@ -291,15 +262,15 @@
               <table cellpadding="0" cellspacing="0" width="100%" style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;border-collapse: collapse !important;">
                 <tr style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">
                   <td class="header-md" style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;font-size: 24px;color: #4d4d4d;text-align: center;line-height: normal;border-collapse: collapse;font-weight: 700;padding: 35px 0 0;">
-                    <?php echo ucfirst($name); ?>
+                    <a style="color: #FF6F6F;font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;text-decoration: none !important;" href="<?php echo $url; ?>"><?php echo ucfirst($name); ?> <br style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;"><small style="font-size: 11px;font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">View All &rarr;</small></a>
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
-	<?php foreach ($day as $row){ ?>
-		<?php //dd( $row[0] ); ?>
-		<tr style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">
+  <?php foreach ($day as $row){ ?>
+    <?php //dd( $row[0] ); ?>
+    <tr style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">
             <td style="padding-bottom: 75px;font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;font-size: 14px;color: #777777;text-align: center;line-height: 21px;border-collapse: collapse;">
               <table cellpadding="0" cellspacing="0" width="100%" style="border-collapse: separate !important;font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">
                 <tr style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">
@@ -310,7 +281,8 @@
                           <table cellpadding="0" cellspacing="0" width="100%" style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;border-collapse: collapse !important;">
                             <tr style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">
                               <td class="info-img" style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;font-size: 14px;color: #777777;text-align: center;line-height: 21px;border-collapse: collapse;width: 258px;border-radius: 5px 5px 0 0;">
-                                <a href="" style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;color: #676767;text-decoration: none !important;"><img class="info-img" src="<?php echo $message->embed($row[0]->image != '' ? $row[0]->image : URL::to('/').'/images/ogimage.png'); ?>" alt="img" style="max-height: 150px;font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;max-width: 600px;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;border: none;width: 258px;border-radius: 5px 5px 0 0;"></a>
+                                <a href="" style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;color: #676767;text-decoration: none !important;"><img class="info-img" src="
+                                  <?php echo $message->embed($row[0]->image != '' ? $row[0]->image : URL::to('/').'/images/ogimage.png'); ?>" alt="img" style="max-height: 150px;font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;max-width: 600px;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;border: none;width: 258px;border-radius: 5px 5px 0 0;"></a>
                               </td>
                             </tr>
                             <tr style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">
@@ -383,7 +355,7 @@
               </table>
             </td>
           </tr>
-	<?php } ?>   
+  <?php } ?>   
         </table>
       </center>
     </td>
@@ -398,9 +370,9 @@
               <strong style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;"><a href="http://netsoc.co/rk" style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;color: #676767;text-decoration: none !important;">UCC Networking, Gaming And Technology Society</a></strong><br style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">
               6 Carraigside <br style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">
               University College Cork<br style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">
-			  Cork, Co Cork <br style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">
-			  Ireland <br style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;"><br style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">
-              <a href="<?php echo URL::route('unsubscribe', ['user_id' => Crypt::encrypt($user->id)]); ?>" style="margin: 0;padding: 0;font-family: &quot;helvetica neue&quot: ;, &quot: ;helvetica&quot: ;, helvetica, arial, sans-serif: ;color: #354458;text-decoration: none !important;"><unsubscribe style="margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;">Unsubscribe</unsubscribe></a>
+        Cork, Co Cork <br style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">
+        Ireland <br style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;"><br style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">
+              <a href="<?php echo URL::route('unsubscribe', ['user_id' => Crypt::encrypt($user->id)]); ?>" style="margin: 0;padding: 0;font-family: 'helvetica neue', 'helvetica', helvetica, arial, sans-serif:color: #354458;text-decoration: none !important;"><unsubscribe style="margin: 0;padding: 0;font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;">Unsubscribe</unsubscribe></a>
             </td>
           </tr>
         </table>

@@ -61,11 +61,30 @@ class SendEmail extends Job implements SelfHandling, ShouldQueue
                     ];
 
             $data['emailEvents'] = [
-              'monday' => EventsController::getDayEventsForUser( 'monday', $this->user->id)->chunk(2),
-              'tuesday' => EventsController::getDayEventsForUser( 'tuesday', $this->user->id)->chunk(2),
-              'wednesday' => EventsController::getDayEventsForUser( 'wednesday', $this->user->id)->chunk(2),
-              'thursday' => EventsController::getDayEventsForUser( 'thursday', $this->user->id)->chunk(2),
-              'friday' => EventsController::getDayEventsForUser( 'friday', $this->user->id)->chunk(2),
+              'monday' => EventsController::getDayEventsForUser( 'monday', $this->user->id)
+                                                ->shuffle()
+                                                ->take(4)
+                                                ->chunk(2),
+
+              'tuesday' => EventsController::getDayEventsForUser( 'tuesday', $this->user->id)
+                                                ->shuffle()
+                                                ->take(4)
+                                                ->chunk(2),
+
+              'wednesday' => EventsController::getDayEventsForUser( 'wednesday', $this->user->id)
+                                                ->shuffle()
+                                                ->take(4)
+                                                ->chunk(2),
+
+              'thursday' => EventsController::getDayEventsForUser( 'thursday', $this->user->id)
+                                                ->shuffle()
+                                                ->take(4)
+                                                ->chunk(2),
+
+              'friday' => EventsController::getDayEventsForUser( 'friday', $this->user->id)
+                                                ->shuffle()
+                                                ->take(4)
+                                                ->chunk(2),
             ];
 
             $data['quote'] = Quote::orderByRaw("RAND()")->first();
