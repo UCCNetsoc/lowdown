@@ -9,6 +9,7 @@ use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\User;
 use App\Event;
+use App\Quote;
 use DB;
 use Mail;
 use App\Http\Controllers\EventsController;
@@ -66,6 +67,8 @@ class SendEmail extends Job implements SelfHandling, ShouldQueue
               'thursday' => EventsController::getDayEventsForUser( 'thursday', $this->user->id)->chunk(2),
               'friday' => EventsController::getDayEventsForUser( 'friday', $this->user->id)->chunk(2),
             ];
+
+            $data['quote'] = Quote::orderByRaw("RAND()")->first();
 
             Mail::send('emails.weekly', $data, function ($message) {
                 $message->from( env('MAIL_ADDRESS'), 'Lowdown');

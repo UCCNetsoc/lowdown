@@ -6,6 +6,7 @@ use App\Setting;
 use App\Society;
 use App\User;
 use App\Event;
+use App\Quote;
 
 use App\Jobs\UpdateEvents;
 
@@ -29,6 +30,7 @@ class DatabaseSeeder extends Seeder
         $this->call('SettingsSeeder');
         $this->call('SocietiesSeeder');
         $this->call('EventsSeeder');
+        $this->call('QuoteSeeder');
 
         Model::reguard();
     }
@@ -112,5 +114,11 @@ class EventsSeeder extends Seeder{
     use Illuminate\Foundation\Bus\DispatchesJobs;
     public function run(){
        $this->dispatch( new UpdateEvents( $isSeeding = true ) );
+    }
+}
+
+class QuoteSeeder extends Seeder{
+    public function run(){
+        Quote::create(['title' => 'The Kevin Bacon Factor', 'subtitle' => 'At any point in time, you are at most two events away from free pizza.']);
     }
 }
