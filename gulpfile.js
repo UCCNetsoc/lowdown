@@ -15,15 +15,3 @@ elixir(function(mix) {
     mix.less('app.less');
     mix.scriptsIn("resources/assets/js", "public/js/app.js");
 });
-
-require('laravel-elixir-browser-sync');
- 
-elixir(function(mix) {
-	mix.browserSync([
-	    'public/**/*',
-	    'resources/views/**/*'
-		], {
-		proxy: 'lowdown.dev',
-		reloadDelay: 500
-	});
-});

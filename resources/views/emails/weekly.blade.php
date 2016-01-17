@@ -258,12 +258,12 @@
         <table cellspacing="0" cellpadding="0" width="600" class="w320" style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;border-collapse: collapse !important;">
           <tr style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">
             <td class="header-lg" style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;font-size: 32px;color: #4d4d4d;text-align: center;line-height: normal;border-collapse: collapse;font-weight: 700;padding: 35px 0 0;">
-              Your weekly Lowdown has arrived!
+              The Kevin Bacon Factor
             </td>
           </tr>
           <tr style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">
             <td class="free-text" style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;font-size: 14px;color: #777777;text-align: center;line-height: 21px;border-collapse: collapse;padding: 10px 60px 0px;width: 100% !important;">
-              This is some other text I'll sort out later.
+              TAt any point in time, you are at most two events away from free pizza.
             </td>
           </tr>
           <tr style="font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;">
