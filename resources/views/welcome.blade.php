@@ -77,12 +77,12 @@
 		<div class="parallax-container">
 			<div class="parallax"><img src="{{ URL::to('/') . '/images/red-geometric-background.png'}}"></div>
 			<div class="container center">
-				<h2>
-					Your societies.
+				<h2 class="col m8 offset-m2">
+					<span class="left">Your email.</span>
 					<br />
-					Your email.
+					<span class="">Your societies.</span>
 					<br />
-					Your choice.
+					<span class="right embolden">Your choice.</span>
 				</h2>
 				<div class="form-wrapper">
 					@include('forms.register')
