@@ -18,7 +18,7 @@
 			<div class="s12 center-align">
 				<h1>Lowdown.</h1>
 				<h2>The complete guide to UCC Societies.</h2>
-				<a href="#description" class="btn-large waves-effect waves-light teal lighten-1"><i class="material-icons left">chat</i> Learn More</a>
+				<a href="#description" class="btn-large waves-effect waves-light teal lighten-1">&darr; Scroll Down &darr;</a>
 			</div>
 			<hr/>
 		</div>
