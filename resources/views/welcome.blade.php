@@ -77,7 +77,7 @@
 		<div class="parallax-container">
 			<div class="parallax"><img src="{{ URL::to('/') . '/images/red-geometric-background.png'}}"></div>
 			<div class="container center">
-				<h2> Signup </h2>
+				<h2> Signup For Weekly Summaries</h2>
 				<div class="form-wrapper">
 					@include('forms.register')
 				</div>
