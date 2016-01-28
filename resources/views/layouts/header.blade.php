@@ -25,14 +25,14 @@
 
 	@yield('extra-head')
 </head>
-<body @if( Route::current() && Route::current()->getPath() == '/' ) class="homepage" @endif>
+<body @if( Route::current() && ( Route::current()->getPath() == '/' || Route::current()->getPath() == 'about' ) ) class="homepage" @else class="@yield('body-class')" @endif>
     @yield('before-page')
     <header>
     	<nav>
 			<div class="nav-wrapper container">
-			  <a href="{{ URL::route('home') }}" class="brand-logo">
+			  <a href="{{ URL::to('/') }}" class="brand-logo">
 			  	<figure>
-					@if( Route::current() && Route::current()->getPath() == '/' )
+					@if( Route::current() && (Route::current()->getPath() == '/' || Route::current()->getPath() == 'about') )
 						{{-- If is the front page, use the alternate logo --}}
 						<img src="{{ App\Setting::where('name', 'logo_alt')->first()->setting }}" alt="{{ env( 'SITE_TITLE' ) }}" class="logo">
 					@else
@@ -73,6 +73,7 @@
 		  		</li>
 				</ul>
 			  <ul class="right hide-on-med-and-down">
+			  	<li><a class="black-text" href="{{URL::route('about')}}" >About</a></li>
 			  	<li><a class="black-text" href="{{URL::route('socsIndex')}}" >Societies</a></li>
 			  	<li><a class="dropdown-button black-text" href="#!" data-activates="dropdown1">Events<i class="material-icons right">arrow_drop_down</i></a></li>
 

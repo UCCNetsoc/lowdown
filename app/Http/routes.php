@@ -10,6 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::get('/testemail', 'EmailController@index');
 
 // Welcome page
 Route::get('/', 'UserController@index');
@@ -19,6 +20,10 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+Route::get('about', [ 'as' => 'about', 'uses' => function(){
+	return view('about');
+}]);
 
 // Login and Registration
 Route::get('/register', ['as' => 'register', 'uses' => 'UserController@register']);

@@ -35,11 +35,15 @@ class UserController extends Controller
         $all_events = Event::where( 'time', '>', date('Y-m-d H:i:s') )
                            ->orderBy(DB::raw('RAND()'));
 
-        $first_six = $all_events->take(6)->get();
+        $data['first_six'] = $all_events->take(3)->get();
 
-        $next_six = $all_events->skip(6)->take(6)->get();
+        $data['next_six'] = $all_events->skip(6)->take(6)->get();
 
-		return View::make( 'welcome' )->with('first_six', $first_six)->with('next_six', $next_six);
+        $data['randomevents'] = $all_events->take(3)->get();
+        // Set a take 999 in order to use skip()
+        $data['events'] = $all_events->skip(3)->take(999)->get();
+
+		return View::make( 'welcome' )->with($data);
 	}
 	
 	/**

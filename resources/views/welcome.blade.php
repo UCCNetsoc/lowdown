@@ -9,132 +9,78 @@
 			<img src="{{URL::to('/')}}/images/video.jpg">
 		</video>
 	</div>
-@stop
+@endsection
 
 @section('content')
-    <div class="valign-wrapper container row welcome-page-hero">
-    	<div class="col s12 valign">
-    		<hr/>
-	        <div class="s12 center-align">
-	            <h1>Lowdown.</h1>
-	            <h2>The complete guide to UCC Societies.</h2>
+	<div class="valign-wrapper container row welcome-page-hero">
+		<div class="col s12 valign">
+			<hr/>
+			<div class="s12 center-align">
+				<h1>Lowdown.</h1>
+				<h2>The complete guide to UCC Societies.</h2>
 				<a href="#description" class="btn-large waves-effect waves-light teal lighten-1"><i class="material-icons left">chat</i> Learn More</a>
-	        </div>
-	        <hr/>
-	    </div>
-    </div>
+			</div>
+			<hr/>
+		</div>
+	</div>
 <!-- End Parallax container -->
 </header>
 
 <main>
-@if(count($first_six) == 6)
-	<section class="event-cards z-depth-2">
-		<div class="container">
-		<div class="row ">
-			@foreach($first_six as $event)
-				<div class="col s12 m6 l4">
-					<div class="card">
-						@if( $event->image )
-							<div class="card-image">
-								<a href="https://www.facebook.com/events/{{$event->facebook_id}}">
-									<img src="{{$event->image}}">
-								</a>
-							</div>
-						@endif
-						<div class="card-content">
-							<h4>{{$event->title}}</h5>
-							<h5>{{$event->society()->first()->name}} Society</h5>
-							<p>{{date('H:i, l j F', strtotime($event->time))}}@if($event->location), <strong>{{$event->location}}</strong>@endif</p>
-						</div>
-						<div class="card-action">
-						  <a href="https://www.facebook.com/events/{{$event->facebook_id}}">
-						  	Facebook Event
-						  </a>
-						</div>
-					</div>
-				</div>
-			@endforeach
-		</div>
-		</div>
-	</section>
-@endif
 
-	<section id="description" class="row z-depth-2">
-		<div class="container">
-			<h1>What is Lowdown?</h1>
-			<p class="flow-text">It's everything you love in one place; your favourite societies events organised and collected online, sent out to you in a personalised newsletter every week. We're helping societies find their audience, and students find new interests.</p>
-			<div class="what-is-lowdown row">
-				<div class="col s12 m4">
-				  <div class="icon-block">
-					<h2 class="center"><i class="material-icons">hearing</i></h2>
-					<h5 class="center">Always Up To Date</h5>
-
-					<p class="light">Lowdown sources all of its information direct from societies' Facebook pages, so you can be assured if something's happening on campus, we'll hear about it.</p>
-				  </div>
-				</div>
-
-				<div class="col s12 m4">
-				  <div class="icon-block">
-					<h2 class="center"><i class="material-icons">email</i></h2>
-					<h5 class="center">Never Miss A Beat</h5>
-
-					<p class="light">Sign up to Lowdown and get weekly emails about your societies' upcoming events every Sunday. We'll even let you get your favourite society's events on your phone calendar.</p>
-				  </div>
-				</div>
-
-				<div class="col s12 m4">
-				  <div class="icon-block">
-					<h2 class="center">♥</h2>
-					<h5 class="center">Everything You Love</h5>
-
-					<p class="light">Pick and choose the societies you want to follow. Get more of what you care about and what interests you. Discover new societies and get involved with something different.</p>
-				  </div>
-				</div>
-			</div>
-
-			<div class="center">
-				<a href="#call-to-action" class="btn-large waves-effect waves-light red-accent lighten-1"><i class="material-icons left">thumb_up</i> Sign Me Up!</a>
-			</div>
-		</div>
-	</section>
-
-@if(count($next_six) == 6)
-	<section class="event-cards z-depth-2">
-		<div class="container">
-			<div class="row ">
-				@foreach($next_six as $event)
-					<div class="col s12 m6 l4">
+@if(count($randomevents) >= 3)
+	<div class="row z-depth-2" id="events">
+		<div class="parallax-container">
+			<div class="parallax"><img src="{{ URL::to('/') . '/images/red-geometric-background.png'}}"></div>
+			<div class="col s12 m12 l10 offset-l1">
+				<h3>Upcoming Events</h3>
+				@foreach( $randomevents as $event )
+					<div class="col s12 m4">
 						<div class="card">
-							@if( $event->image )
-								<div class="card-image">
-									<a href="https://www.facebook.com/events/{{$event->facebook_id}}">
-										<img src="{{$event->image}}">
-									</a>
-								</div>
-							@endif
+							<div class="card-image">
+								<img src="{{$event->image}}">
+								<span class="card-title">{{$event->title}}</span>
+							</div>
 							<div class="card-content">
-								<h4>{{$event->title}}</h5>
-								<h5>{{$event->society()->first()->name}} Society</h5>
-								<p>{{date('H:i, l j F', strtotime($event->time))}}@if($event->location), <strong>{{$event->location}}</strong>@endif</p>
+								<p><em>{{date('H:i, l j F', strtotime($event->time))}}@if($event->location), <strong>{{$event->location}}</strong>@endif</em></p>
+								<p>{{ str_limit($event->description, 250) }}</p>
 							</div>
 							<div class="card-action">
-							  <a href="https://www.facebook.com/events/{{$event->facebook_id}}">
-							  	Facebook Event
-							  </a>
+								<a href="https://www.facebook.com/events/{{$event->facebook_id}}" class="red-text text-lighten-2">View Event &rarr;</a>
+								<a href="{{ URL::route('soc', ['id' => $event->society->id]) }}" class="red-text text-lighten-2">{{$event->society->name}} Society &rarr;</a>
 							</div>
 						</div>
 					</div>
 				@endforeach
 			</div>
 		</div>
-	</section>
+	</div>
 @endif
 
-	<section id="call-to-action" class="row">
-		<div class="container white-text center">
-			<h2> Signup </h2>
-			<div class="form-wrapper">
-				@include('forms.register')
+@if( count($events) > 1 )
+	<div class="row remove-col-padding" id="photos">
+		@foreach($events as $event )
+			<div class="col s6 m3">
+				<div class="card hoverable">
+					<a href="https://www.facebook.com/events/{{$event->facebook_id}}">
+						<div class="card-image center-cropped" style="background-image: url('{{$event->image}}');">
+							<img src="{{$event->image}}" />
+						</div>
+					</a>
+				</div>
+			</div>
+		@endforeach
+	</div>
+@endif
+
+	<section id="call-to-action" class="row home-background">
+		<div class="parallax-container">
+			<div class="parallax"><img src="{{ URL::to('/') . '/images/red-geometric-background.png'}}"></div>
+			<div class="container center">
+				<h2> Signup </h2>
+				<div class="form-wrapper">
+					@include('forms.register')
+				</div>
 			</div>
 		</div>
 	</section>
@@ -142,12 +88,12 @@
 @endsection
 
 @section('after-page')
-<footer class="page-footer">
+<footer class="page-footer home-footer">
   <div class="footer-copyright">
-    <div class="container">
-    © {{date('Y')}} UCC Netsoc
-    <a class="grey-text text-lighten-4 right" href="https://github.com/UCCNetworkingSociety/lowdown/blob/master/LICENSE">MIT Licence</a>
-    </div>
+	<div class="container">
+	© {{date('Y')}} UCC Netsoc
+	<a class="grey-text text-lighten-4 right" href="https://github.com/UCCNetworkingSociety/lowdown/blob/master/LICENSE">MIT Licence</a>
+	</div>
   </div>
 </footer>
 @endsection
