@@ -60,15 +60,17 @@
 @if( count($events) > 1 )
 	<div class="row remove-col-padding" id="photos">
 		@foreach($events as $event )
-			<div class="col s6 m3">
-				<div class="card hoverable">
-					<a href="https://www.facebook.com/events/{{$event->facebook_id}}">
-						<div class="card-image center-cropped" style="background-image: url('{{$event->image}}');">
-							<img src="{{$event->image}}" />
-						</div>
-					</a>
+			@if( $event->image != '' )
+				<div class="col s6 m3">
+					<div class="card hoverable">
+						<a href="https://www.facebook.com/events/{{$event->facebook_id}}">
+							<div class="card-image center-cropped" style="background-image: url('{{$event->image}}');">
+								<img src="{{$event->image}}" />
+							</div>
+						</a>
+					</div>
 				</div>
-			</div>
+			@endif
 		@endforeach
 	</div>
 @endif
