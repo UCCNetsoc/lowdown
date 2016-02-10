@@ -39,7 +39,7 @@ Route::group(['prefix' => 'events'], function()
 {
 	// Events
 	
-	Route::get('/this-week.json', ['as' => 'this-week.json', 'uses' => 'EventsController@thisWeekJSON']);
+	Route::get('/this-week/json', ['as' => 'this-week.json', 'uses' => 'EventsController@thisWeekJSON']);
 	Route::get('/this-week', ['as' => 'this-week.json', 'uses' => 'EventsController@thisWeek']);
 
 	if( (boolean) env('ENABLE_UPDATE_QUEUE_KICKOFF') ){
