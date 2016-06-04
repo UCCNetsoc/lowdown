@@ -61,20 +61,21 @@ class WeeklyMail extends Job implements SelfHandling, ShouldQueue
                            ->where( 'time', '<', date('Y-m-d H:i:s', time()+604800) )
                            ->get();
 
-        foreach($all_events as $event){
-            $request = new FacebookRequest($session, 'GET', "/" . $event->facebook_id);
+        if( count( $all_events ) > 6 ){
+            foreach($all_events as $event){
+                $request = new FacebookRequest($session, 'GET', "/" . $event->facebook_id);
 
-            try{
-                $response = $request->execute();
-            } catch(\Exception $ex) {
-                // Facebook Exception looking up event; probably deleted, should mirror here.
-                $event->delete();
+                try{
+                    $response = $request->execute();
+                } catch(\Exception $ex) {
+                    // Facebook Exception looking up event; probably deleted, should mirror here.
+                    $event->delete();
+                }
             }
-        }
 
-
-        foreach(User::where('unsubscribed_email', 'no')->get() as $user){
-            $this->dispatch( new SendEmail($user) );
+            foreach(User::where('unsubscribed_email', 'no')->get() as $user){
+                $this->dispatch( new SendEmail($user) );
+            }
         }
     }
 }
