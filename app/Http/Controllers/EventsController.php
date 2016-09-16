@@ -183,7 +183,8 @@ class EventsController extends Controller
 		$nextWeek = strtotime("+1 week");
 
 		$qry = Event::where( 'time', '>', date('Y-m-d H:i:s') )
-			     	->where( 'time', '<', date('Y-m-d H:i:s', $nextWeek) );
+			     	->where( 'time', '<', date('Y-m-d H:i:s', $nextWeek) )
+			     	->join( 'societies', 'events.society_id', '=', 'societies.id');
 
 		if( Auth::check() ){
 			// If the user's logged in, take their subscriptions
@@ -211,6 +212,7 @@ class EventsController extends Controller
 
 		return Event::where( 'time', '>', date('Y-m-d H:i:s') )
 					->where( 'time', '<', date('Y-m-d H:i:s', $nextWeek) )
+					->join( 'societies', 'events.society_id', '=', 'societies.id')
 					->get();
 	}
 
@@ -223,7 +225,8 @@ class EventsController extends Controller
 		$nextWeek = strtotime("+2 weeks");
 
 		$qry = Event::where( 'time', '>', date('Y-m-d H:i:s', $thisWeek) )
-			     	->where( 'time', '<', date('Y-m-d H:i:s', $nextWeek) );
+			     	->where( 'time', '<', date('Y-m-d H:i:s', $nextWeek) )
+			     	->join( 'societies', 'events.society_id', '=', 'societies.id');
 
 		if( Auth::check() ){
 			// If the user's logged in, take their subscriptions
@@ -252,6 +255,7 @@ class EventsController extends Controller
 
 		return Event::where( 'time', '>', date('Y-m-d H:i:s', $thisWeek) )
 					->where( 'time', '<', date('Y-m-d H:i:s', $nextWeek) )
+					->join( 'societies', 'events.society_id', '=', 'societies.id')
 					->get();
 	}
 
