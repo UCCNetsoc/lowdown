@@ -162,17 +162,6 @@ class EventsController extends Controller
 
 
 
-	/**
-	 * A list of events from this week to be converted to JSON
-	 * @return Event Events for this coming week
-	 */
-	public function thisWeekJSON(){
-		$nextWeek = strtotime("+1 week");
-
-		return Event::where( 'time', '>', date('Y-m-d H:i:s') )
-					->where( 'time', '<', date('Y-m-d H:i:s', $nextWeek) )
-					->get();
-	}
 
 	/**
 	 * Dispatches a job to update the events list
@@ -211,6 +200,59 @@ class EventsController extends Controller
 		return View::make('events.day', ['day' => "The next seven days.",
 								     'events' => $events ]);
 
+	}
+
+	/**
+	 * A list of events from this week to be converted to JSON
+	 * @return Event Events for this coming week
+	 */
+	public function thisWeekJSON(){
+		$nextWeek = strtotime("+1 week");
+
+		return Event::where( 'time', '>', date('Y-m-d H:i:s') )
+					->where( 'time', '<', date('Y-m-d H:i:s', $nextWeek) )
+					->get();
+	}
+
+	/**
+	 * Presents a view of the coming week's events
+	 * @return View events.day
+	 */
+	public function nextWeek(){
+		$thisWeek = strtotime("+1 week");
+		$nextWeek = strtotime("+2 weeks");
+
+		$qry = Event::where( 'time', '>', date('Y-m-d H:i:s', $thisWeek) )
+			     	->where( 'time', '<', date('Y-m-d H:i:s', $nextWeek) );
+
+		if( Auth::check() ){
+			// If the user's logged in, take their subscriptions
+			// into account
+	        $soc_ids = DB::table('subscriptions')
+			 ->where('user_id', Auth::user()->id)
+			 ->lists('society_id');
+
+			 $qry = $qry->whereIn('society_id', $soc_ids);
+		}
+
+		$events = $qry->orderBy('time')->get();
+
+		return View::make('events.day', ['day' => "The week after this",
+								     'events' => $events ]);
+
+	}
+	
+	/**
+	 * A list of events from this week to be converted to JSON
+	 * @return Event Events for this coming week
+	 */
+	public function nextWeekJSON(){
+		$thisWeek = strtotime("+1 week");
+		$nextWeek = strtotime("+2 weeks");
+
+		return Event::where( 'time', '>', date('Y-m-d H:i:s', $thisWeek) )
+					->where( 'time', '<', date('Y-m-d H:i:s', $nextWeek) )
+					->get();
 	}
 
 	/**
