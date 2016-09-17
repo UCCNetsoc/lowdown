@@ -2,10 +2,14 @@
 
 namespace App\Http;
 
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
 {
+    use DispatchesJobs;
+
     /**
      * The application's global HTTP middleware stack.
      *
@@ -30,4 +34,13 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
     ];
+
+
+    protected function schedule(Schedule $schedule)
+    {
+        $schedule->call(function () {
+            $job = (new \App\Jobs\WeeklyMail())->onQueue('weekly-email');
+            $this->dispatch($job);
+        })->weekly()->sundays()->at('17:00');
+    }
 }

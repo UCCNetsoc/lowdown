@@ -38,9 +38,6 @@ class WeeklyMail extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        // Same time next week! :D
-        $job = (new \App\Jobs\WeeklyMail())->delay(604800);
-        $this->dispatch($job);
 
         // We'll just want to double-check our Facebook events still exist
         // before we email people about them...
@@ -74,7 +71,7 @@ class WeeklyMail extends Job implements SelfHandling, ShouldQueue
             }
 
             foreach(User::where('unsubscribed_email', 'no')->get() as $user){
-                $this->dispatch( new SendEmail($user) );
+                $this->dispatch( (new SendEmail($user))->onQueue('emails') );
             }
         }
     }
