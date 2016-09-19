@@ -275,7 +275,7 @@ class EventsController extends Controller
 
 		$vEvent = new \Eluceo\iCal\Component\Event();
 
-		$eventTime = new DateTime($event->time, new DateTimeZone("Europe/Dublin"));
+		$eventTime = new DateTime($event->time);
 		$endTime = $eventTime;
 
 		// ISO 8601 time interval format for ONE HOUR
@@ -286,7 +286,6 @@ class EventsController extends Controller
 
 		$vEvent
 		    ->setDtStart($eventTime)
-		    ->setUseTimezone(true)
 		    ->setDtEnd($endTime)
 		    ->setSummary($eventSummary);
 
@@ -323,7 +322,7 @@ class EventsController extends Controller
 		foreach($events as $event){
 			$vEvent = new \Eluceo\iCal\Component\Event();
 
-			$eventTime = new DateTime($event->time, new DateTimeZone("Europe/Dublin"));
+			$eventTime = new DateTime($event->time);
 			$endTime = $eventTime;
 
 			// ISO 8601 time interval format for ONE HOUR
@@ -334,7 +333,6 @@ class EventsController extends Controller
 
 			$vEvent
 			    ->setDtStart($eventTime)
-			    ->setUseTimezone(true)
 			    ->setDtEnd($endTime)
 			    ->setSummary($eventSummary);
 
